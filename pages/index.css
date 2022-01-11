@@ -7,3 +7,5 @@
 /* Global */
 @import url(../blocks/root/root.css);
 
+/* Header */
+@import url(../blocks/header/header.css);
