@@ -1,0 +1,17 @@
+.profile__edit-bth {
+  width: 24px;
+  height: 24px;
+  background-color: #000;
+  background-image: url(../../../images/Pen.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  transition: .5s;
+  border: 1px solid #FFFFFF;
+  cursor: pointer;
+  margin-left: 18px;
+  margin-bottom: 0px;
+}
+
+.profile__edit-bth:hover {
+  opacity: .6;
+}

@@ -1,0 +1,6 @@
+.profile {
+  display: grid;
+  grid-template-columns: 120px 1fr 150px;
+  gap: 30px;
+  padding-top: 40px;
+}
