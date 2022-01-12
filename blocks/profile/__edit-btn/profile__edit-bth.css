@@ -15,3 +15,11 @@
 .profile__edit-bth:hover {
   opacity: .6;
 }
+
+@media screen and (max-width: 767px) {
+  .profile__edit-bth {
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+  }
+}

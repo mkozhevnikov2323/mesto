@@ -10,6 +10,9 @@
 /* Header */
 @import url(../blocks/header/header.css);
 
+/* Logo */
+@import url(../blocks/logo/logo.css);
+
 /* Content */
 @import url(../blocks/content/content.css);
 

@@ -5,3 +5,12 @@
     line-height: 1.22;
     padding-top: 16px;
 }
+
+@media screen and (max-width: 767px) {
+  .profile__profession {
+    font-size: 14px;
+    line-height: 17px;
+    padding-top: 14px;
+    text-align: center;
+  }
+}

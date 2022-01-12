@@ -19,3 +19,11 @@
 .popup__save-btn:hover {
   background-color: rgba(0,0,0,.8);
 }
+
+@media screen and (max-width: 767px) {
+  .popup__save-btn {
+    font-size: 14px;
+    padding-bottom: 14px;
+    padding-top: 14px;
+  }
+}

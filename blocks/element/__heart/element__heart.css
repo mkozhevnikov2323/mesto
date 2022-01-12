@@ -14,3 +14,22 @@
 .element__heart:hover {
   opacity: .5;
 }
+
+@media screen and (max-width: 1024px) {
+  .element__heart {
+    margin-bottom: 25px;
+    margin-left: 13%;
+  }
+}
+
+@media screen and (max-width: 890px) {
+  .element__heart {
+    margin-left: 10%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .element__heart {
+    margin-left: 5%;
+  }
+}

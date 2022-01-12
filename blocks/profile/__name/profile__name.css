@@ -5,3 +5,17 @@
   line-height: 1.14;
   display: inline-block;
 }
+
+@media screen and (max-width: 1024px) {
+  .profile__name {
+    font-size: 38px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profile__name {
+    font-size: 27px;
+    line-height: 1.22;
+    padding-left: 33px;
+  }
+}

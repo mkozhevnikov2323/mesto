@@ -12,3 +12,9 @@
   overflow: hidden;
   width: 70%;
 }
+
+@media screen and (max-width: 1024px) {
+  .element__place {
+    padding-bottom: 20px;
+  }
+}

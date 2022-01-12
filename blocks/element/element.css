@@ -2,3 +2,9 @@
   border-radius: 10px;
   overflow: hidden;
 }
+
+@media screen and (max-width: 1024px) {
+  .element {
+    border-radius: 15px;
+  }
+}
