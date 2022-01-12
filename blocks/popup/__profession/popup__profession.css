@@ -1,0 +1,17 @@
+.popup__profession {
+  padding-top: 13px;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  border: 0;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  padding-bottom: 13px;
+  margin-top: 17px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+  outline: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
