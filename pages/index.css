@@ -21,3 +21,11 @@
 @import url(../blocks/profile/__profession/profile__profession.css);
 @import url(../blocks/profile/__add-btn/profile__add-btn.css);
 @import url(../blocks/profile/__edit-btn/profile__edit-bth.css);
+
+/* Elements */
+@import url(../blocks/elements/elements.css);
+@import url(../blocks/element/element.css);
+@import url(../blocks/element/__photo/element__photo.css);
+@import url(../blocks/element/__rectangle/element__rectangle.css);
+@import url(../blocks/element/__place/element__place.css);
+@import url(../blocks/element/__heart/element__heart.css);
