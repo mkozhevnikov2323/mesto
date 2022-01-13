@@ -1,6 +1,6 @@
 .popup__container {
   margin: auto;
-  width: 430px;
+  max-width: 430px;
   background-color: #fff;
   color: #000;
   box-shadow: 0px 0px 25px rgb(0 0 0 / 15%);
@@ -14,5 +14,7 @@
   .popup__container {
     width: 88%;
     padding: 22px;
+    padding-top: 26px;
+    padding-bottom: 25px;
   }
 }

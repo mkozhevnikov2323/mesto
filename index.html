@@ -9,17 +9,17 @@
 </head>
 <body class="root">
   <header class="header">
-    <img src="./images/Logo.svg" alt="Логотип" class="logo">
+    <img src="./images/Logo.svg" alt="Логотип" class="header__logo">
   </header>
   <main class="content">
     <section class="profile">
       <img src="./images/Avatar.jpg" alt="Фото профиля" class="profile__avatar">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <button class="profile__edit-bth"></button>
+        <button type="button" class="profile__edit-bth"></button>
         <p class="profile__profession">Исследователь океана</p>
       </div>
-      <button class="profile__add-btn"></button>
+      <button type="button" class="profile__add-btn"></button>
     </section>
     <section>
       <ul class="elements">
@@ -27,42 +27,42 @@
           <div class="element__rectangle">
             <img src="./images/Karachaevsk.jpg" alt="Фото природы" class="element__photo">
             <p class="element__place">Карачаевск</p>
-            <div class="element__heart"></div>
+            <button type="button" class="element__heart"></button>
           </div>
         </li>
         <li class="element">
           <div class="element__rectangle">
             <img src="./images/Elbrus.jpg" alt="Фото природы" class="element__photo">
             <p class="element__place">Гора Эльбрус</p>
-            <div class="element__heart"></div>
+            <button type="button" class="element__heart"></button>
           </div>
         </li>
         <li class="element">
           <div class="element__rectangle">
             <img src="./images/Dombay.jpg" alt="Фото природы" class="element__photo">
             <p class="element__place">Домбай</p>
-            <div class="element__heart"></div>
+            <button type="button" class="element__heart"></button>
           </div>
         </li>
         <li class="element">
           <div class="element__rectangle">
             <img src="./images/Elbrus.jpg" alt="Фото природы" class="element__photo">
             <p class="element__place">Гора Эльбрус</p>
-            <div class="element__heart"></div>
+            <button type="button" class="element__heart"></button>
           </div>
         </li>
         <li class="element">
           <div class="element__rectangle">
             <img src="./images/Dombay.jpg" alt="Фото природы" class="element__photo">
             <p class="element__place">Домбай</p>
-            <div class="element__heart"></div>
+            <button type="button" class="element__heart"></button>
           </div>
         </li>
         <li class="element">
           <div class="element__rectangle">
             <img src="./images/Karachaevsk.jpg" alt="Фото природы" class="element__photo">
             <p class="element__place">Карачаево-Черкессия</p>
-            <div class="element__heart"></div>
+            <button type="button" class="element__heart"></button>
           </div>
         </li>
       </ul>
@@ -72,15 +72,17 @@
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
   <div class="popup">
-    <form action="#" class="popup__container">
+    <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <input type="text" class="popup__name" value="">
-      <input type="text" class="popup__profession" value="">
-      <button class="popup__save-btn">Сохранить</button>
-      <img src="./images/Close-Icon.svg" alt="Иконка закрытия" class="popup__close-icon">
-    </form>
+      <form action="#" class="popup__form">
+        <input type="text" class="popup__input popup__input_data_name" value="">
+        <input type="text" class="popup__input popup__input_data_job" value="">
+        <button type="submit" class="popup__save-btn">Сохранить</button>
+      </form>
+      <button class="popup__close-icon"></button>
+    </div>
   </div>
 
-  <script src="./pages/index.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 </html>

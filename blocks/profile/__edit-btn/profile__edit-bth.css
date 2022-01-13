@@ -8,8 +8,9 @@
   transition: .5s;
   border: 1px solid #FFFFFF;
   cursor: pointer;
-  margin-left: 18px;
-  margin-bottom: 0px;
+  margin-left: 15px;
+  position: relative;
+  bottom: 11px;
 }
 
 .profile__edit-bth:hover {
@@ -20,6 +21,7 @@
   .profile__edit-bth {
     width: 18px;
     height: 18px;
-    margin-left: 10px;
+    margin-left: 8px;
+    bottom: 9px;
   }
 }

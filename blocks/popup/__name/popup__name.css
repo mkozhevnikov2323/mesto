@@ -5,15 +5,12 @@
   box-sizing: border-box;
   border: 0;
   border-bottom: 1px solid rgba(0,0,0,.2);
-  padding-bottom: 13px;
-  margin-top: 40px;
+  padding-bottom: 9px;
+  margin-top: 34px;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.21;
   outline: none;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 @media screen and (max-width: 767px) {

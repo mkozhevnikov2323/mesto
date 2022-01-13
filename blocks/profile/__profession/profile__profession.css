@@ -3,14 +3,19 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 1.22;
-    padding-top: 16px;
+    padding-top: 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 90%;
 }
 
 @media screen and (max-width: 767px) {
   .profile__profession {
+    max-width: 100%;
     font-size: 14px;
     line-height: 17px;
-    padding-top: 14px;
+    padding-top: 5px;
     text-align: center;
   }
 }

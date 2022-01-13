@@ -1,8 +1,8 @@
 .popup__save-btn {
   border: 0;
   box-sizing: border-box;
-  margin-top: 55px;
-  width: 100%;
+  margin-top: 48px;
+  width: 358px;
   background-color: #000;
   border-radius: 2px;
   color: #fff;
@@ -10,8 +10,8 @@
   font-size: 18px;
   line-height: 22px;
   text-align: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 14px;
+  padding-bottom: 14px;
   cursor: pointer;
   transition: .5s;
 }
@@ -23,7 +23,8 @@
 @media screen and (max-width: 767px) {
   .popup__save-btn {
     font-size: 14px;
-    padding-bottom: 14px;
-    padding-top: 14px;
+    width: 100%;
+    margin-top: 45px;
+    line-height: 18px;
   }
 }
