@@ -27,7 +27,7 @@ const formEditUser = popupProfile.querySelector('.popup__form');
 const formAddPlace = popupPlace.querySelector('.popup__form');
 
 // Like places
-const likeBtns = document.querySelector('.element__heart');
+// const likeBtn = document.querySelector('.element__heart');
 
 // Places
 const places = document.querySelector('.elements');
@@ -89,12 +89,20 @@ function formSubmitNewUserInfo(evt) {
   closePopupEditUser();
 }
 
-function addPlace(placeName = `${initialCards[0].name}`, placeLink = `${initialCards[0].link}`) {
+function addPlace(placeName, placeLink) {
   const placeTemplate = document.querySelector('#place-template').content;
   const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
 
   placeElement.querySelector('.element__place').textContent = placeName;
   placeElement.querySelector('.element__photo').setAttribute('src', placeLink);
+
+  placeElement.querySelector('.element__heart').addEventListener('click', function(evt) {
+    evt.target.classList.toggle('element__heart_active');
+  });
+
+  placeElement.querySelector('.element__trash').addEventListener('click', function(evt) {
+    evt.target.parentElement.parentElement.remove();
+  });
 
   places.prepend(placeElement);
 }
@@ -108,7 +116,8 @@ function renderPlaces() {
 function formSubmitAddPlace(evt) {
   evt.preventDefault();
 
-  addPlace();
+  addPlace(popupPlaceName.value, popupPlaceLink.value);
+  console.log(popupPlaceLink.value);
 
   closePopupAddPlace();
 }
@@ -127,7 +136,5 @@ formEditUser.addEventListener('submit', formSubmitNewUserInfo);
 
 formAddPlace.addEventListener('submit', formSubmitAddPlace);
 
-likeBtns.addEventListener('click', function(evt) {
-  evt.target.classList.toggle('element__heart_active');
-});
+
 
