@@ -1,3 +1,4 @@
 .element__photo {
   width: 100%;
+  cursor: pointer;
 }

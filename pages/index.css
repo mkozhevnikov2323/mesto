@@ -30,6 +30,7 @@
 @import url(../blocks/element/__rectangle/element__rectangle.css);
 @import url(../blocks/element/__place/element__place.css);
 @import url(../blocks/element/__heart/element__heart.css);
+@import url(../blocks/element/__trash/element__trash.css);
 
 /* Footer */
 @import url(../blocks/footer/footer.css);
