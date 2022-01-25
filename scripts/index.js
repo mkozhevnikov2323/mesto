@@ -1,11 +1,13 @@
 "use strict";
 
-// Open and close pop-up
+// Open and close pop-up Edit Profile
 const editBtn = document.querySelector('.profile__edit-bth');
-const addPlaceBtn = document.querySelector('.profile__add-btn');
 const popupProfile = document.querySelector('.popup_action_edit-profile');
-const popupPlace = document.querySelector('.popup_action_add-place');
 const closePopupProfileBtn = popupProfile.querySelector('.popup__close-icon');
+
+// Open and close pop-up Add Place
+const addPlaceBtn = document.querySelector('.profile__add-btn');
+const popupPlace = document.querySelector('.popup_action_add-place');
 const closePopupPlaceBtn = popupPlace.querySelector('.popup__close-icon');
 
 // Get info about user
@@ -21,17 +23,20 @@ const popupPlaceLink = popupPlace.querySelector('.popup__input_data_place-link')
 // Save new user info
 const formEditUser = popupProfile.querySelector('.popup__form');
 
+// Like places
+const likeBtns = document.querySelector('.element__heart');
+
 function openPopupEditUser() {
   popupProfile.classList.add('popup_opened');
   getUserInfo();
 }
 
-function openPopupAddPlace() {
-  popupPlace.classList.add('popup_opened');
-}
-
 function closePopupEditUser() {
   popupProfile.classList.remove('popup_opened');
+}
+
+function openPopupAddPlace() {
+  popupPlace.classList.add('popup_opened');
 }
 
 function closePopupAddPlace() {
@@ -42,6 +47,10 @@ function getUserInfo() {
   popupName.value = userName.textContent;
   popupProfession.value = userProfession.textContent;
 }
+
+// function likePlace() {
+//   likeBtns.classList.toggle('element__heart_active');
+// }
 
 function formSubmitNewUserInfo(evt) {
   evt.preventDefault();
@@ -61,3 +70,8 @@ closePopupProfileBtn.addEventListener('click', closePopupEditUser);
 closePopupPlaceBtn.addEventListener('click', closePopupAddPlace);
 
 formEditUser.addEventListener('submit', formSubmitNewUserInfo);
+
+likeBtns.addEventListener('click', function(evt) {
+  evt.target.classList.toggle('element__heart_active');
+});
+

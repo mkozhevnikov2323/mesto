@@ -1,5 +1,34 @@
 .element__heart_active {
+  display: inline-block;
+  width: 22px;
+  height: 19px;
+  border: 0;
+  background-color: transparent;
+  position: relative;
+  bottom: 7px;
+  left: 18px;
+  cursor: pointer;
+  transition: .5s;
   background-image: url(../../../../images/Heart-active.svg);
   background-position: center center;
   background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 1024px) {
+  .element__heart_active {
+    bottom: 25px;
+    left: 65px;
+  }
+}
+
+@media screen and (max-width: 890px) {
+  .element__heart_active {
+    left: 10%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .element__heart_active {
+    left: 5%;
+  }
 }
