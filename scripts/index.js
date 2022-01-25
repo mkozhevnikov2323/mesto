@@ -2,25 +2,40 @@
 
 // Open and close pop-up
 const editBtn = document.querySelector('.profile__edit-bth');
-const popup = document.querySelector('.popup');
-const closePopupBtn = popup.querySelector('.popup__close-icon');
+const addPlaceBtn = document.querySelector('.profile__add-btn');
+const popupProfile = document.querySelector('.popup_action_edit-profile');
+const popupPlace = document.querySelector('.popup_action_add-place');
+const closePopupProfileBtn = popupProfile.querySelector('.popup__close-icon');
+const closePopupPlaceBtn = popupPlace.querySelector('.popup__close-icon');
 
 // Get info about user
 const userName = document.querySelector('.profile__name');
 const userProfession = document.querySelector('.profile__profession');
-const popupName = popup.querySelector('.popup__input_data_name');
-const popupProfession = popup.querySelector('.popup__input_data_job');
+const popupName = popupProfile.querySelector('.popup__input_data_name');
+const popupProfession = popupProfile.querySelector('.popup__input_data_job');
+
+// Get info about place
+const popupPlaceName = popupPlace.querySelector('.popup__input_data_place-name');
+const popupPlaceLink = popupPlace.querySelector('.popup__input_data_place-link');
 
 // Save new user info
-const form = popup.querySelector('.popup__form');
+const formEditUser = popupProfile.querySelector('.popup__form');
 
-function openPopup() {
-  popup.classList.add('popup_opened');
+function openPopupEditUser() {
+  popupProfile.classList.add('popup_opened');
   getUserInfo();
 }
 
-function closePopup() {
-  popup.classList.remove('popup_opened');
+function openPopupAddPlace() {
+  popupPlace.classList.add('popup_opened');
+}
+
+function closePopupEditUser() {
+  popupProfile.classList.remove('popup_opened');
+}
+
+function closePopupAddPlace() {
+  popupPlace.classList.remove('popup_opened');
 }
 
 function getUserInfo() {
@@ -34,11 +49,15 @@ function formSubmitNewUserInfo(evt) {
   userName.textContent = popupName.value;
   userProfession.textContent = popupProfession.value;
 
-  closePopup();
+  closePopupEditUser();
 }
 
-editBtn.addEventListener('click', openPopup);
+editBtn.addEventListener('click', openPopupEditUser);
 
-closePopupBtn.addEventListener('click', closePopup);
+addPlaceBtn.addEventListener('click', openPopupAddPlace);
 
-form.addEventListener('submit', formSubmitNewUserInfo);
+closePopupProfileBtn.addEventListener('click', closePopupEditUser);
+
+closePopupPlaceBtn.addEventListener('click', closePopupAddPlace);
+
+formEditUser.addEventListener('submit', formSubmitNewUserInfo);

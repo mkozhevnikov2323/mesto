@@ -43,6 +43,7 @@
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__input/_data/popup__input_data_name.css);
 @import url(../blocks/popup/__input/_data/popup__input_data_job.css);
+@import url(../blocks/popup/__input/_data/popup__input_data_place-link.css);
 @import url(../blocks/popup/__name/popup__name.css);
 @import url(../blocks/popup/__profession/popup__profession.css);
 @import url(../blocks/popup/__save-btn/popup__save-btn.css);
