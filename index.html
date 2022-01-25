@@ -23,7 +23,7 @@
     </section>
     <section>
       <ul class="elements">
-        <li class="element">
+        <!-- <li class="element">
           <div class="element__rectangle">
             <img src="./images/Trash.svg" alt="Иконка удаления" class="element__trash">
             <img src="./images/Karachaevsk.jpg" alt="Фото природы" class="element__photo">
@@ -70,7 +70,7 @@
             <p class="element__place">Карачаево-Черкессия</p>
             <button type="button" class="element__heart"></button>
           </div>
-        </li>
+        </li> -->
       </ul>
     </section>
   </main>
@@ -99,6 +99,17 @@
       <button class="popup__close-icon"></button>
     </div>
   </div>
+
+  <template id="place-template">
+    <li class="element">
+      <div class="element__rectangle">
+        <img src="./images/Trash.svg" alt="Иконка удаления" class="element__trash">
+        <img src="" alt="Фото природы" class="element__photo">
+        <p class="element__place"></p>
+        <button type="button" class="element__heart"></button>
+      </div>
+    </li>
+  </template>
 
   <script src="./scripts/index.js"></script>
 </body>

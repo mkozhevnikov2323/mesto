@@ -23,8 +23,40 @@ const popupPlaceLink = popupPlace.querySelector('.popup__input_data_place-link')
 // Save new user info
 const formEditUser = popupProfile.querySelector('.popup__form');
 
+// Save new place
+const formAddPlace = popupPlace.querySelector('.popup__form');
+
 // Like places
 const likeBtns = document.querySelector('.element__heart');
+
+// Places
+const places = document.querySelector('.elements');
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
 
 function openPopupEditUser() {
   popupProfile.classList.add('popup_opened');
@@ -48,10 +80,6 @@ function getUserInfo() {
   popupProfession.value = userProfession.textContent;
 }
 
-// function likePlace() {
-//   likeBtns.classList.toggle('element__heart_active');
-// }
-
 function formSubmitNewUserInfo(evt) {
   evt.preventDefault();
 
@@ -60,6 +88,32 @@ function formSubmitNewUserInfo(evt) {
 
   closePopupEditUser();
 }
+
+function addPlace(placeName = `${initialCards[0].name}`, placeLink = `${initialCards[0].link}`) {
+  const placeTemplate = document.querySelector('#place-template').content;
+  const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
+
+  placeElement.querySelector('.element__place').textContent = placeName;
+  placeElement.querySelector('.element__photo').setAttribute('src', placeLink);
+
+  places.prepend(placeElement);
+}
+
+function renderPlaces() {
+  for (let i = 0; i < initialCards.length; i++) {
+    addPlace(`${initialCards[i].name}`, `${initialCards[i].link}`);
+  }
+}
+
+function formSubmitAddPlace(evt) {
+  evt.preventDefault();
+
+  addPlace();
+
+  closePopupAddPlace();
+}
+
+renderPlaces();
 
 editBtn.addEventListener('click', openPopupEditUser);
 
@@ -70,6 +124,8 @@ closePopupProfileBtn.addEventListener('click', closePopupEditUser);
 closePopupPlaceBtn.addEventListener('click', closePopupAddPlace);
 
 formEditUser.addEventListener('submit', formSubmitNewUserInfo);
+
+formAddPlace.addEventListener('submit', formSubmitAddPlace);
 
 likeBtns.addEventListener('click', function(evt) {
   evt.target.classList.toggle('element__heart_active');
