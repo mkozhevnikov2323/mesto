@@ -26,9 +26,6 @@ const formEditUser = popupProfile.querySelector('.popup__form');
 // Save new place
 const formAddPlace = popupPlace.querySelector('.popup__form');
 
-// Like places
-// const likeBtn = document.querySelector('.element__heart');
-
 // Places
 const places = document.querySelector('.elements');
 const initialCards = [
@@ -104,6 +101,14 @@ function addPlace(placeName, placeLink) {
     evt.target.parentElement.parentElement.remove();
   });
 
+  placeElement.querySelector('.element__photo').addEventListener('click', function(evt) {
+    evt.target.parentElement.nextElementSibling.classList.add('popup_opened');
+  });
+
+  placeElement.querySelector('.popup__close-icon').addEventListener('click', function(evt) {
+    evt.target.parentElement.parentElement.classList.remove('popup_opened');
+  });
+
   places.prepend(placeElement);
 }
 
@@ -126,9 +131,9 @@ renderPlaces();
 
 editBtn.addEventListener('click', openPopupEditUser);
 
-addPlaceBtn.addEventListener('click', openPopupAddPlace);
-
 closePopupProfileBtn.addEventListener('click', closePopupEditUser);
+
+addPlaceBtn.addEventListener('click', openPopupAddPlace);
 
 closePopupPlaceBtn.addEventListener('click', closePopupAddPlace);
 
