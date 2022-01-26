@@ -114,22 +114,25 @@ function addPlace(placeName, placeLink) {
   places.prepend(placeElement);
 }
 
-function renderPlaces() {
-  for (let i = 0; i < initialCards.length; i++) {
-    addPlace(`${initialCards[i].name}`, `${initialCards[i].link}`);
+function renderPlaces(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    addPlace(`${arr[i].name}`, `${arr[i].link}`);
   }
 }
 
 function formSubmitAddPlace(evt) {
   evt.preventDefault();
 
-  addPlace(popupPlaceName.value, popupPlaceLink.value);
-  console.log(popupPlaceLink.value);
+  if (popupPlaceName.value === '' || popupPlaceLink.value === '') {
+    addPlace('Архыз', 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg');
+  } else {
+    addPlace(popupPlaceName.value, popupPlaceLink.value);
+  }
 
   closePopupAddPlace();
 }
 
-renderPlaces();
+renderPlaces(initialCards);
 
 editBtn.addEventListener('click', openPopupEditUser);
 
@@ -142,6 +145,3 @@ closePopupPlaceBtn.addEventListener('click', closePopupAddPlace);
 formEditUser.addEventListener('submit', formSubmitNewUserInfo);
 
 formAddPlace.addEventListener('submit', formSubmitAddPlace);
-
-
-
