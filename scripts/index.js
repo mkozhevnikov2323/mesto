@@ -92,6 +92,8 @@ function addPlace(placeName, placeLink) {
 
   placeElement.querySelector('.element__place').textContent = placeName;
   placeElement.querySelector('.element__photo').setAttribute('src', placeLink);
+  placeElement.querySelector('.popup__photo-title').textContent = placeName;
+  placeElement.querySelector('.popup__photo').setAttribute('src', placeLink);
 
   placeElement.querySelector('.element__heart').addEventListener('click', function(evt) {
     evt.target.classList.toggle('element__heart_active');
