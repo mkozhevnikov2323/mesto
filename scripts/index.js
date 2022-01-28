@@ -55,21 +55,29 @@ const initialCards = [
   }
 ];
 
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+}
+
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+}
+
 function openPopupEditUser() {
-  popupProfile.classList.add('popup_opened');
+  openPopup(popupProfile);
   getUserInfo();
 }
 
 function closePopupEditUser() {
-  popupProfile.classList.remove('popup_opened');
+  closePopup(popupProfile);
 }
 
 function openPopupAddPlace() {
-  popupPlace.classList.add('popup_opened');
+  openPopup(popupPlace);
 }
 
 function closePopupAddPlace() {
-  popupPlace.classList.remove('popup_opened');
+  closePopup(popupPlace);
 }
 
 function getUserInfo() {
@@ -77,7 +85,7 @@ function getUserInfo() {
   popupProfession.value = userProfession.textContent;
 }
 
-function formSubmitNewUserInfo(evt) {
+function sendNewUserInfo(evt) {
   evt.preventDefault();
 
   userName.textContent = popupName.value;
@@ -120,7 +128,7 @@ function renderPlaces(arr) {
   }
 }
 
-function formSubmitAddPlace(evt) {
+function sendAddedPlace(evt) {
   evt.preventDefault();
 
   if (popupPlaceName.value === '' || popupPlaceLink.value === '') {
@@ -142,6 +150,6 @@ addPlaceBtn.addEventListener('click', openPopupAddPlace);
 
 closePopupPlaceBtn.addEventListener('click', closePopupAddPlace);
 
-formEditUser.addEventListener('submit', formSubmitNewUserInfo);
+formEditUser.addEventListener('submit', sendNewUserInfo);
 
-formAddPlace.addEventListener('submit', formSubmitAddPlace);
+formAddPlace.addEventListener('submit', sendAddedPlace);
