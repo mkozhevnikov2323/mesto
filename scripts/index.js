@@ -137,6 +137,7 @@ function createPlace(placeName, placeLink) {
   const placePhoto = placeElement.querySelector('.element__photo');
   const placeTitle = placeElement.querySelector('.element__place');
   const heart = placeElement.querySelector('.element__heart');
+  const trash = placeElement.querySelector('.element__trash');
 
   function getPlaceInfo() {
     imageShowPlace.src = placeLink;
@@ -151,6 +152,10 @@ function createPlace(placeName, placeLink) {
   getPlaceInfo();
 
   addCard(placeElement, places);
+
+  trash.addEventListener('click', function(evt) {
+    evt.target.parentElement.parentElement.remove();
+  });
 
   heart.addEventListener('click', function(evt) {
     evt.target.classList.toggle('element__heart_active');
