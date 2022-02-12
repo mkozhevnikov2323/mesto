@@ -35,7 +35,9 @@
       <h2 class="popup__title">Редактировать профиль</h2>
       <form action="#" class="popup__form">
         <input type="text" class="popup__input popup__input_data_name" value="" required minlength="2" maxlength="40">
+        <p class="popup__error">Вы пропустили это поле.</p>
         <input type="text" class="popup__input popup__input_data_job" value="" required minlength="2" maxlength="200">
+        <p class="popup__error popup__error_visible">Вы пропустили это поле.</p>
         <button type="submit" class="popup__save-btn">Сохранить</button>
       </form>
       <button class="popup__close-icon"></button>
@@ -46,7 +48,9 @@
       <h2 class="popup__title">Новое место</h2>
       <form action="#" class="popup__form">
         <input type="text" class="popup__input popup__input_data_place-name" value="" placeholder="Название" required minlength="2" maxlength="30">
+        <p class="popup__error">Вы пропустили это поле.</p>
         <input type="url" class="popup__input popup__input_data_place-link" value="" placeholder="Ссылка на картинку" required>
+        <p class="popup__error popup__error_visible">Вы пропустили это поле.</p>
         <button type="submit" class="popup__save-btn">Создать</button>
       </form>
       <button class="popup__close-icon"></button>

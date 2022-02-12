@@ -13,6 +13,10 @@
   outline: none;
 }
 
+.popup__input::placeholder {
+  color: #c4c4c4;
+}
+
 @media screen and (max-width: 767px) {
   .popup__input {
     margin-top: 62px;
