@@ -70,6 +70,12 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
+function closePopupPressOverlay(evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.target);
+  }
+}
+
 function openPopupEditUser() {
   openPopup(popupProfile);
   getUserInfo();
@@ -177,6 +183,20 @@ addPlaceBtn.addEventListener('click', openPopupAddPlace);
 closePopupPlaceBtn.addEventListener('click', closePopupAddPlace);
 
 closePopupShowPlaceBtn.addEventListener('click', closePopupShowPlace);
+
+document.addEventListener('keydown', function(evt) {
+  if (evt.key === "Escape") {
+    closePopup(popupProfile);
+    closePopup(popupPlace);
+    closePopup(popupShowPlace);
+  }
+});
+
+popupProfile.addEventListener('click', closePopupPressOverlay);
+
+popupPlace.addEventListener('click', closePopupPressOverlay);
+
+popupShowPlace.addEventListener('click', closePopupPressOverlay);
 
 formEditUser.addEventListener('submit', sendNewUserInfo);
 
