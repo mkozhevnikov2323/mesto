@@ -6,3 +6,7 @@
   padding-top: 13px;
   padding-bottom: 13px;
 }
+
+.popup__save-btn_disabled:hover {
+  background-color: #fff;
+}
