@@ -1,13 +1,13 @@
 "use strict";
 
-const showInputError = (inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = inputElement.nextElementSibling;
   inputElement.classList.add('popup__input_type_error');
   errorElement.textContent = errorMessage;
   errorElement.classList.add('popup__error_visible');
 };
 
-const hideInputError = (inputElement) => {
+const hideInputError = (formElement, inputElement) => {
   const errorElement = inputElement.nextElementSibling;
   inputElement.classList.remove('popup__input_type_error');
   errorElement.classList.remove('popup__error_visible');
