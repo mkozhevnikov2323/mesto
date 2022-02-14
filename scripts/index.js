@@ -1,19 +1,19 @@
 "use strict";
 
+// All popups
+const popups = document.querySelectorAll('.popup');
+
 // Open and close pop-up Edit Profile
 const editBtn = document.querySelector('.profile__edit-bth');
 const popupProfile = document.querySelector('.popup_action_edit-profile');
-const closePopupProfileBtn = popupProfile.querySelector('.popup__close-icon');
 
 // Open and close pop-up Add Place
 const addPlaceBtn = document.querySelector('.profile__add-btn');
 const popupPlace = document.querySelector('.popup_action_add-place');
-const closePopupPlaceBtn = popupPlace.querySelector('.popup__close-icon');
 
 // Open and close pop-up Show Place
 const imagePlace = document.querySelector('.element__photo');
 const popupShowPlace = document.querySelector('.popup_action_show-place');
-const closePopupShowPlaceBtn = popupShowPlace.querySelector('.popup__close-icon');
 const imageShowPlace = popupShowPlace.querySelector('.popup__photo');
 const titleShowPlace = popupShowPlace.querySelector('.popup__photo-title');
 
@@ -32,6 +32,9 @@ const formEditUser = popupProfile.querySelector('.popup__form');
 
 // Save new place
 const formAddPlace = popupPlace.querySelector('.popup__form');
+
+// Template
+const placeTemplate = document.querySelector('#place-template').content;
 
 // Places
 const places = document.querySelector('.elements');
@@ -64,15 +67,24 @@ const initialCards = [
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupPressEscape);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupPressEscape);
 }
 
 function closePopupPressOverlay(evt) {
   if (evt.target === evt.currentTarget) {
     closePopup(evt.target);
+  }
+}
+
+function closePopupPressEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
   }
 }
 
@@ -128,17 +140,12 @@ function renderPlaces(arr) {
 function sendAddedPlace(evt) {
   evt.preventDefault();
 
-  if (popupPlaceName.value === '' || popupPlaceLink.value === '') {
-    createPlace('Архыз', 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg');
-  } else {
-    createPlace(popupPlaceName.value, popupPlaceLink.value);
-  }
+  createPlace(popupPlaceName.value, popupPlaceLink.value);
 
   closePopupAddPlace();
 }
 
 function createPlace(placeName, placeLink) {
-  const placeTemplate = document.querySelector('#place-template').content;
   const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
   const placePhoto = placeElement.querySelector('.element__photo');
   const placeTitle = placeElement.querySelector('.element__place');
@@ -176,28 +183,19 @@ renderPlaces(initialCards);
 
 editBtn.addEventListener('click', openPopupEditUser);
 
-closePopupProfileBtn.addEventListener('click', closePopupEditUser);
-
 addPlaceBtn.addEventListener('click', openPopupAddPlace);
-
-closePopupPlaceBtn.addEventListener('click', closePopupAddPlace);
-
-closePopupShowPlaceBtn.addEventListener('click', closePopupShowPlace);
-
-document.addEventListener('keydown', function(evt) {
-  if (evt.key === "Escape") {
-    closePopup(popupProfile);
-    closePopup(popupPlace);
-    closePopup(popupShowPlace);
-  }
-});
-
-popupProfile.addEventListener('click', closePopupPressOverlay);
-
-popupPlace.addEventListener('click', closePopupPressOverlay);
-
-popupShowPlace.addEventListener('click', closePopupPressOverlay);
 
 formEditUser.addEventListener('submit', sendNewUserInfo);
 
 formAddPlace.addEventListener('submit', sendAddedPlace);
+
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+      if (evt.target.classList.contains('popup_opened')) {
+          closePopup(popup);
+      }
+      if (evt.target.classList.contains('popup__close-icon')) {
+        closePopup(popup);
+      }
+  })
+})
