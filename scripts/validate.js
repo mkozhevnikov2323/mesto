@@ -66,6 +66,7 @@ function enableValidation(settingsObj) {
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
+      evt.target.reset();
     });
     setEventListeners(formElement, settingsObj);
   });
