@@ -127,21 +127,19 @@ function sendNewUserInfo(evt) {
   closePopupEditUser();
 }
 
-function addCard(card, container) {
-  container.prepend(card);
+function addCreatedCardPrepend(container, createFunc) {
+  container.prepend(createFunc);
 }
 
 function renderPlaces(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    createPlace(`${arr[i].name}`, `${arr[i].link}`);
-  }
+  arr.forEach((item) => {
+    addCreatedCardPrepend(places, createPlace(item.name, item.link));
+  });
 }
 
 function sendAddedPlace(evt) {
   evt.preventDefault();
-
-  createPlace(popupPlaceName.value, popupPlaceLink.value);
-
+  addCreatedCardPrepend(places, createPlace(popupPlaceName.value, popupPlaceLink.value));
   closePopupAddPlace();
 }
 
@@ -164,8 +162,6 @@ function createPlace(placeName, placeLink) {
 
   getPlaceInfo();
 
-  addCard(placeElement, places);
-
   trash.addEventListener('click', function(evt) {
     evt.target.parentElement.parentElement.remove();
   });
@@ -177,6 +173,8 @@ function createPlace(placeName, placeLink) {
   placePhoto.addEventListener('click', openPopupShowPlace);
 
   placePhoto.addEventListener('click', getPlaceInfo);
+
+  return placeElement;
 }
 
 renderPlaces(initialCards);
