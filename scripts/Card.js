@@ -51,3 +51,43 @@ export class Card {
     });
   }
 }
+
+
+
+// function createPlace(placeName, placeLink) {
+//   const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
+//   const placePhoto = placeElement.querySelector('.element__photo');
+//   const placeTitle = placeElement.querySelector('.element__place');
+//   const heart = placeElement.querySelector('.element__heart');
+//   const trash = placeElement.querySelector('.element__trash');
+
+//   function getPlaceInfo() {
+//     imageShowPlace.src = placeLink;
+//     imageShowPlace.alt = placeName;
+//     titleShowPlace.textContent = placeName;
+//   }
+
+//   placeTitle.textContent = placeName;
+//   placePhoto.setAttribute('src', placeLink);
+//   placePhoto.setAttribute('alt', placeName);
+
+//   getPlaceInfo();
+
+//   trash.addEventListener('click', function(evt) {
+//     evt.target.parentElement.parentElement.remove();
+//   });
+
+//   heart.addEventListener('click', function(evt) {
+//     evt.target.classList.toggle('element__heart_active');
+//   });
+
+//   placePhoto.addEventListener('click', openPopupShowPlace);
+
+//   placePhoto.addEventListener('click', getPlaceInfo);
+
+//   return placeElement;
+// }
+
+
+
+// renderPlaces(initialCards);

@@ -15,7 +15,7 @@ const popupPlace = document.querySelector('.popup_action_add-place');
 
 // Open and close pop-up Show Place
 // const imagePlace = document.querySelector('.element__photo');
-const popupShowPlace = document.querySelector('.popup_action_show-place');
+// const popupShowPlace = document.querySelector('.popup_action_show-place');
 // const imageShowPlace = popupShowPlace.querySelector('.popup__photo');
 // const titleShowPlace = popupShowPlace.querySelector('.popup__photo-title');
 
@@ -66,6 +66,16 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
+const settings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-btn',
+  inactiveButtonClass: 'popup__save-btn_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -140,48 +150,22 @@ function addCreatedCardPrepend(container, createFunc) {
 // }
 
 function sendAddedPlace(evt) {
+  const item = {
+    name: popupPlaceName.value,
+    link: popupPlaceLink.value
+  };
+  const card = new Card(item, '#place-template');
+  const cardElement = card.generateCard();
+
   evt.preventDefault();
-  addCreatedCardPrepend(places, createPlace(popupPlaceName.value, popupPlaceLink.value));
+
+  addCreatedCardPrepend(places, cardElement);
+
   closePopupAddPlace();
 }
 
-// function createPlace(placeName, placeLink) {
-//   const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
-//   const placePhoto = placeElement.querySelector('.element__photo');
-//   const placeTitle = placeElement.querySelector('.element__place');
-//   const heart = placeElement.querySelector('.element__heart');
-//   const trash = placeElement.querySelector('.element__trash');
-
-//   function getPlaceInfo() {
-//     imageShowPlace.src = placeLink;
-//     imageShowPlace.alt = placeName;
-//     titleShowPlace.textContent = placeName;
-//   }
-
-//   placeTitle.textContent = placeName;
-//   placePhoto.setAttribute('src', placeLink);
-//   placePhoto.setAttribute('alt', placeName);
-
-//   getPlaceInfo();
-
-//   trash.addEventListener('click', function(evt) {
-//     evt.target.parentElement.parentElement.remove();
-//   });
-
-//   heart.addEventListener('click', function(evt) {
-//     evt.target.classList.toggle('element__heart_active');
-//   });
-
-//   placePhoto.addEventListener('click', openPopupShowPlace);
-
-//   placePhoto.addEventListener('click', getPlaceInfo);
-
-//   return placeElement;
-// }
 
 
-
-// renderPlaces(initialCards);
 initialCards.forEach((item) => {
   // Создадим экземпляр карточки
   const card = new Card(item, '#place-template');
@@ -191,6 +175,18 @@ initialCards.forEach((item) => {
   // Добавляем в DOM
   document.querySelector('.elements').prepend(cardElement);
 });
+
+
+
+
+const validateFormAddPlace = new FormValidator(settings, formAddPlace);
+validateFormAddPlace.enableValidation();
+
+
+const validateFormEditUser = new FormValidator(settings, formEditUser);
+validateFormEditUser.enableValidation();
+
+
 
 editBtn.addEventListener('click', openPopupEditUser);
 
