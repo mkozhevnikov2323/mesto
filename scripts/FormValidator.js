@@ -1,3 +1,4 @@
+
 export class FormValidator {
   constructor(data, form) {
     this._formSelector = data.formSelector;
@@ -49,7 +50,7 @@ export class FormValidator {
   }
 
   _toggleButtonState(inputList, buttonElement) {
-    if (this._hasInvalidInput(inputList)) {
+    if (this._hasInvalidInput(inputList))  {
       buttonElement.classList.add(this._inactiveButtonClass);
       buttonElement.setAttribute('disabled', '');
     }
@@ -64,9 +65,11 @@ export class FormValidator {
     const inputList = Array.from(form.querySelectorAll(this._inputSelector));
     const buttonElement = form.querySelector(this._submitButtonSelector);
 
+    this._toggleButtonState(inputList, buttonElement);
+
     form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      evt.target.reset();
+
       this._toggleButtonState(inputList, buttonElement);
     });
 

@@ -12,6 +12,7 @@ const popupProfile = document.querySelector('.popup_action_edit-profile');
 // Open and close pop-up Add Place
 const addPlaceBtn = document.querySelector('.profile__add-btn');
 const popupPlace = document.querySelector('.popup_action_add-place');
+const popupPlaceSubmitBtn = popupPlace.querySelector('.popup__save-btn');
 
 // Get info about user
 const userName = document.querySelector('.profile__name');
@@ -135,13 +136,19 @@ function sendAddedPlace(evt) {
     link: popupPlaceLink.value
   };
   const card = new Card(item, '#place-template');
-  const cardElement = card.generateCard();
 
   evt.preventDefault();
 
-  addCreatedCardPrepend(places, cardElement);
+  addCreatedCardPrepend(places, card.generateCard());
+
+  evt.target.reset();
+
+  popupPlaceSubmitBtn.classList.add('popup__save-btn_disabled');
+  popupPlaceSubmitBtn.setAttribute('disabled', '');
 
   closePopupAddPlace();
+
+  console.log(item);
 }
 
 initialCards.forEach((item) => {
