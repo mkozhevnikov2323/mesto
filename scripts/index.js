@@ -1,4 +1,5 @@
 "use strict";
+// import { Card } from "./Card.js";
 
 // All popups
 const popups = document.querySelectorAll('.popup');
@@ -143,41 +144,96 @@ function sendAddedPlace(evt) {
   closePopupAddPlace();
 }
 
-function createPlace(placeName, placeLink) {
-  const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
-  const placePhoto = placeElement.querySelector('.element__photo');
-  const placeTitle = placeElement.querySelector('.element__place');
-  const heart = placeElement.querySelector('.element__heart');
-  const trash = placeElement.querySelector('.element__trash');
+// function createPlace(placeName, placeLink) {
+//   const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
+//   const placePhoto = placeElement.querySelector('.element__photo');
+//   const placeTitle = placeElement.querySelector('.element__place');
+//   const heart = placeElement.querySelector('.element__heart');
+//   const trash = placeElement.querySelector('.element__trash');
 
-  function getPlaceInfo() {
-    imageShowPlace.src = placeLink;
-    imageShowPlace.alt = placeName;
-    titleShowPlace.textContent = placeName;
+//   function getPlaceInfo() {
+//     imageShowPlace.src = placeLink;
+//     imageShowPlace.alt = placeName;
+//     titleShowPlace.textContent = placeName;
+//   }
+
+//   placeTitle.textContent = placeName;
+//   placePhoto.setAttribute('src', placeLink);
+//   placePhoto.setAttribute('alt', placeName);
+
+//   getPlaceInfo();
+
+//   trash.addEventListener('click', function(evt) {
+//     evt.target.parentElement.parentElement.remove();
+//   });
+
+//   heart.addEventListener('click', function(evt) {
+//     evt.target.classList.toggle('element__heart_active');
+//   });
+
+//   placePhoto.addEventListener('click', openPopupShowPlace);
+
+//   placePhoto.addEventListener('click', getPlaceInfo);
+
+//   return placeElement;
+// }
+
+class Card {
+  constructor(data, cardSelector) {
+    this._name = data.name;
+    this._link = data.link;
+    this._cardSelector = cardSelector;
+    // this._isLiked = false;
   }
 
-  placeTitle.textContent = placeName;
-  placePhoto.setAttribute('src', placeLink);
-  placePhoto.setAttribute('alt', placeName);
+  _getTemplate() {
+    const cardElement = document.querySelector(this._cardSelector).content.querySelector('.element').cloneNode(true);
+    return cardElement;
+  }
 
-  getPlaceInfo();
+  _getPlaceInfo() {
+    imageShowPlace.src = this._link;
+    imageShowPlace.alt = this._name;
+    titleShowPlace.textContent = this._name;
+  }
 
-  trash.addEventListener('click', function(evt) {
-    evt.target.parentElement.parentElement.remove();
-  });
+  generateCard() {
+    this._element = this._getTemplate();
+    this._setEventListeners();
 
-  heart.addEventListener('click', function(evt) {
-    evt.target.classList.toggle('element__heart_active');
-  });
+    this._element.querySelector('.element__photo').setAttribute('src', this._link);
+    this._element.querySelector('.element__photo').setAttribute('alt', this._name);
+    this._element.querySelector('.element__place').textContent = this._name;
 
-  placePhoto.addEventListener('click', openPopupShowPlace);
+    return this._element;
+  }
 
-  placePhoto.addEventListener('click', getPlaceInfo);
+  _setEventListeners() {
+    this._element.querySelector('.element__photo').addEventListener('click', () => {
+      openPopupShowPlace();
+      this._getPlaceInfo();
+    });
 
-  return placeElement;
+    this._element.querySelector('.element__trash').addEventListener('click', (evt) => {
+      evt.target.parentElement.parentElement.remove();
+    });
+
+    this._element.querySelector('.element__heart').addEventListener('click', (evt) => {
+      evt.target.classList.toggle('element__heart_active');
+    });
+  }
 }
 
-renderPlaces(initialCards);
+// renderPlaces(initialCards);
+initialCards.forEach((item) => {
+  // Создадим экземпляр карточки
+  const card = new Card(item, '#place-template');
+  // Создаём карточку и возвращаем наружу
+  const cardElement = card.generateCard();
+
+  // Добавляем в DOM
+  document.querySelector('.elements').prepend(cardElement);
+});
 
 editBtn.addEventListener('click', openPopupEditUser);
 
