@@ -72,7 +72,7 @@ const settings = {
 const validateFormAddPlace = new FormValidator(settings, formAddPlace);
 const validateFormEditUser = new FormValidator(settings, formEditUser);
 
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupPressEscape);
 }
@@ -96,8 +96,8 @@ export const closePopupPressEscape = (evt) => {
 }
 
 function openPopupEditUser() {
-  openPopup(popupProfile);
   getUserInfo();
+  openPopup(popupProfile);
 }
 
 function closePopupEditUser() {
@@ -126,34 +126,37 @@ function sendNewUserInfo(evt) {
   closePopupEditUser();
 }
 
+function createCard(name, link, cardSelector) {
+  const newCard = {
+    name,
+    link
+  };
+  const card = new Card(newCard, cardSelector);
+  return card;
+}
+
 function addCreatedCardPrepend(container, createFunc) {
   container.prepend(createFunc);
 }
 
 function sendAddedPlace(evt) {
-  const item = {
-    name: popupPlaceName.value,
-    link: popupPlaceLink.value
-  };
-  const card = new Card(item, '#place-template');
+  const generatedCard = createCard(popupPlaceName.value, popupPlaceLink.value, '#place-template');
 
   evt.preventDefault();
 
-  addCreatedCardPrepend(places, card.generateCard());
+  addCreatedCardPrepend(places, generatedCard.generateCard());
 
-  evt.target.reset();
-
-  popupPlaceSubmitBtn.classList.add('popup__save-btn_disabled');
-  popupPlaceSubmitBtn.setAttribute('disabled', '');
+  // popupPlaceSubmitBtn.classList.add('popup__save-btn_disabled');
+  // popupPlaceSubmitBtn.setAttribute('disabled', '');
 
   closePopupAddPlace();
 
-  console.log(item);
+  evt.target.reset();
 }
 
 initialCards.forEach((item) => {
-  const card = new Card(item, '#place-template');
-  const cardElement = card.generateCard();
+  const generatedCard = createCard(item.name, item.link, '#place-template');
+  const cardElement = generatedCard.generateCard();
 
   document.querySelector('.elements').prepend(cardElement);
 });

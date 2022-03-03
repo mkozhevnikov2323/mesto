@@ -1,4 +1,4 @@
-import { closePopupPressEscape } from "./index.js";
+import { closePopupPressEscape, openPopup } from "./index.js";
 
 const popupShowPlace = document.querySelector('.popup_action_show-place');
 const imageShowPlace = popupShowPlace.querySelector('.popup__photo');
@@ -17,8 +17,7 @@ export class Card {
   }
 
   _openPopupShowPlace() {
-    document.querySelector('.popup_action_show-place').classList.add('popup_opened');
-    document.addEventListener('keydown', closePopupPressEscape);
+    openPopup(popupShowPlace);
   }
 
   _getPlaceInfo() {
