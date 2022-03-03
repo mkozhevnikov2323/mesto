@@ -132,7 +132,8 @@ function createCard(name, link, cardSelector) {
     link
   };
   const card = new Card(newCard, cardSelector);
-  return card;
+  const generatedCard = card.generateCard();
+  return generatedCard;
 }
 
 function addCreatedCardPrepend(container, createFunc) {
@@ -140,11 +141,9 @@ function addCreatedCardPrepend(container, createFunc) {
 }
 
 function sendAddedPlace(evt) {
-  const generatedCard = createCard(popupPlaceName.value, popupPlaceLink.value, '#place-template');
-
   evt.preventDefault();
 
-  addCreatedCardPrepend(places, generatedCard.generateCard());
+  addCreatedCardPrepend(places, createCard(popupPlaceName.value, popupPlaceLink.value, '#place-template'));
 
   evt.target.reset();
 
@@ -154,10 +153,7 @@ function sendAddedPlace(evt) {
 }
 
 initialCards.forEach((item) => {
-  const generatedCard = createCard(item.name, item.link, '#place-template');
-  const cardElement = generatedCard.generateCard();
-
-  document.querySelector('.elements').prepend(cardElement);
+  addCreatedCardPrepend(places, createCard(item.name, item.link, '#place-template'));
 });
 
 validateFormAddPlace.enableValidation();
