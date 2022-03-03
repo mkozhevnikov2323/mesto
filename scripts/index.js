@@ -146,12 +146,11 @@ function sendAddedPlace(evt) {
 
   addCreatedCardPrepend(places, generatedCard.generateCard());
 
-  // popupPlaceSubmitBtn.classList.add('popup__save-btn_disabled');
-  // popupPlaceSubmitBtn.setAttribute('disabled', '');
+  evt.target.reset();
+
+  validateFormAddPlace.enableValidation();
 
   closePopupAddPlace();
-
-  evt.target.reset();
 }
 
 initialCards.forEach((item) => {
