@@ -1,7 +1,7 @@
 .popup__save-btn {
   border: 0;
   box-sizing: border-box;
-  margin-top: 48px;
+  margin-top: 38px;
   width: 358px;
   background-color: #000;
   border-radius: 2px;
@@ -24,7 +24,7 @@
   .popup__save-btn {
     font-size: 14px;
     width: 100%;
-    margin-top: 45px;
+    margin-top: 35px;
     line-height: 18px;
   }
 }
