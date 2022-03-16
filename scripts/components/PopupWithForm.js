@@ -37,7 +37,6 @@ export class PopupWithForm extends Popup {
   _getInputValues() {
     this._placeName = popupPlaceName.value;
     this._placeLink = popupPlaceLink.value;
-    // console.log(this._placeName)
   }
 
   close() {

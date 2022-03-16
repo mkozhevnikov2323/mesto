@@ -15,6 +15,7 @@ export const userName = document.querySelector('.profile__name');
 export const userProfession = document.querySelector('.profile__profession');
 export const popupName = popupProfile.querySelector('.popup__input_data_name');
 export const popupProfession = popupProfile.querySelector('.popup__input_data_job');
+export const userInfoData = {name: userName.textContent, job: userProfession.textContent};
 
 // Get info about place
 export const popupPlaceName = popupPlace.querySelector('.popup__input_data_place-name');
