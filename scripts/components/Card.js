@@ -1,4 +1,4 @@
-import { closePopupPressEscape, openPopup } from "./index.js";
+import { closePopupPressEscape, openPopup } from "../pages/index.js";
 
 const popupShowPlace = document.querySelector('.popup_action_show-place');
 const imageShowPlace = popupShowPlace.querySelector('.popup__photo');
