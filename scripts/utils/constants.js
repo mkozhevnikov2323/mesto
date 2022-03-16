@@ -27,6 +27,7 @@ export const formEditUser = popupProfile.querySelector('.popup__form');
 export const formAddPlace = popupPlace.querySelector('.popup__form');
 
 // Places
+export const placesSelector = '.elements';
 export const places = document.querySelector('.elements');
 export const initialCards = [
   {

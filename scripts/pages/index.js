@@ -15,10 +15,12 @@ import {
   formAddPlace,
   places,
   initialCards,
-  settings
+  settings,
+  placesSelector
 } from "../utils/constants.js"
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
+import { Section } from "../components/Section.js";
 
 
 // Validation
@@ -79,35 +81,51 @@ function sendNewUserInfo(evt) {
   closePopupEditUser();
 }
 
-function createCard(name, link, cardSelector) {
-  const newCard = {
-    name,
-    link
-  };
-  const card = new Card(newCard, cardSelector);
-  const generatedCard = card.generateCard();
-  return generatedCard;
-}
+// function createCard(name, link, cardSelector) {
+//   const newCard = {
+//     name,
+//     link
+//   };
+//   const card = new Card(newCard, cardSelector);
+//   const generatedCard = card.generateCard();
+//   return generatedCard;
+// }
 
-function addCreatedCardPrepend(container, createFunc) {
-  container.prepend(createFunc);
-}
+// function addCreatedCardPrepend(container, createFunc) {
+//   container.prepend(createFunc);
+// }
 
-function sendAddedPlace(evt) {
-  evt.preventDefault();
+// function sendAddedPlace(evt) {
+//   evt.preventDefault();
 
-  addCreatedCardPrepend(places, createCard(popupPlaceName.value, popupPlaceLink.value, '#place-template'));
+//   addCreatedCardPrepend(places, createCard(popupPlaceName.value, popupPlaceLink.value, '#place-template'));
 
-  evt.target.reset();
+//   evt.target.reset();
 
-  validateFormAddPlace.enableValidation();
+//   validateFormAddPlace.enableValidation();
 
-  closePopupAddPlace();
-}
+//   closePopupAddPlace();
+// }
 
-initialCards.forEach((item) => {
-  addCreatedCardPrepend(places, createCard(item.name, item.link, '#place-template'));
-});
+// initialCards.forEach((item) => {
+//   addCreatedCardPrepend(places, createCard(item.name, item.link, '#place-template'));
+// });
+
+
+const cardsList = new Section({
+  items: initialCards,
+  renderer: (cardItem) => {
+    const card = new Card(cardItem, '#place-template');
+    const cardElement = card.generateCard();
+    cardsList.addItem(cardElement);
+  }
+},
+placesSelector
+);
+
+cardsList.renderItems();
+
+
 
 validateFormAddPlace.enableValidation();
 
