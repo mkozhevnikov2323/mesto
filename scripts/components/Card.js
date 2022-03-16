@@ -1,14 +1,15 @@
-import { closePopupPressEscape, openPopup } from "../pages/index.js";
-
-const popupShowPlace = document.querySelector('.popup_action_show-place');
-const imageShowPlace = popupShowPlace.querySelector('.popup__photo');
-const titleShowPlace = popupShowPlace.querySelector('.popup__photo-title');
+import {
+  popupShowPlace,
+  imageShowPlace,
+  titleShowPlace
+} from '../utils/constants.js';
 
 export class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -17,7 +18,9 @@ export class Card {
   }
 
   _openPopupShowPlace() {
-    openPopup(popupShowPlace);
+    // openPopup(popupShowPlace);
+    this._handleCardClick();
+    // console.log(12)
   }
 
   _getPlaceInfo() {

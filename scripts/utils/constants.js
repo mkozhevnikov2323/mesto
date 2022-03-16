@@ -26,6 +26,11 @@ export const formEditUser = popupProfile.querySelector('.popup__form');
 // Save new place
 export const formAddPlace = popupPlace.querySelector('.popup__form');
 
+// Popup places
+export const popupShowPlace = document.querySelector('.popup_action_show-place');
+export const imageShowPlace = popupShowPlace.querySelector('.popup__photo');
+export const titleShowPlace = popupShowPlace.querySelector('.popup__photo-title');
+
 // Places
 export const placesSelector = '.elements';
 export const places = document.querySelector('.elements');
