@@ -6,8 +6,8 @@ import {
 } from '../utils/constants.js';
 
 export class PopupWithImage extends Popup {
-  constructor(data, cardSelector) {
-    super(cardSelector);
+  constructor(data, popupSelector) {
+    super(popupSelector);
     this._name = data.name;
     this._link = data.link;
   }

@@ -24,6 +24,7 @@ import { FormValidator } from "../components/FormValidator.js";
 import { Section } from "../components/Section.js";
 import { Popup } from "../components/Popup.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
 
 
 // Validation
@@ -145,7 +146,18 @@ validateFormEditUser.enableValidation();
 
 // editBtn.addEventListener('click', openPopupEditUser);
 
-// addPlaceBtn.addEventListener('click', openPopupAddPlace);
+addPlaceBtn.addEventListener('click', () => {
+  const popup = new PopupWithForm(popupPlace, () => {
+    // const cardElement = new Section()
+    // const cardData = popup._getInputValues;
+    console.log(popup);
+  });
+  popup.open();
+  validateFormAddPlace.enableValidation();
+  popup.setEventListeners();
+  popup.renderItem();
+
+});
 
 // formEditUser.addEventListener('submit', sendNewUserInfo);
 
