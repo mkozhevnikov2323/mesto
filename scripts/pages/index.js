@@ -23,6 +23,7 @@ import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { Section } from "../components/Section.js";
 import { Popup } from "../components/Popup.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
 
 
 // Validation
@@ -122,7 +123,7 @@ const cardsList = new Section({
       cardItem,
       '#place-template',
       () => {
-        const popup = new Popup(popupShowPlace);
+        const popup = new PopupWithImage(cardItem, popupShowPlace);
         popup.open();
         popup.setEventListeners();
       },

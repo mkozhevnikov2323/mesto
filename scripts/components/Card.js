@@ -1,9 +1,3 @@
-import {
-  popupShowPlace,
-  imageShowPlace,
-  titleShowPlace
-} from '../utils/constants.js';
-
 export class Card {
   constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
@@ -18,15 +12,7 @@ export class Card {
   }
 
   _openPopupShowPlace() {
-    // openPopup(popupShowPlace);
     this._handleCardClick();
-    // console.log(12)
-  }
-
-  _getPlaceInfo() {
-    imageShowPlace.src = this._link;
-    imageShowPlace.alt = this._name;
-    titleShowPlace.textContent = this._name;
   }
 
   generateCard() {
@@ -43,7 +29,6 @@ export class Card {
   _setEventListeners() {
     this._element.querySelector('.element__photo').addEventListener('click', () => {
       this._openPopupShowPlace();
-      this._getPlaceInfo();
     });
 
     this._element.querySelector('.element__trash').addEventListener('click', (evt) => {
