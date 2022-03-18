@@ -6,8 +6,8 @@ import {
 } from '../utils/constants.js';
 
 export class PopupWithForm extends Popup {
-  constructor(cardSelector, submiterForm) {
-    super(cardSelector);
+  constructor({ popupSelector, submiterForm }) {
+    super(popupSelector);
     this._submiterForm = submiterForm;
   }
 
@@ -29,23 +29,33 @@ export class PopupWithForm extends Popup {
 
     this._popupSelector.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._getInputValues();
+      this._submiterForm(this._getInputValues());
       this.close();
     });
   }
 
   _getInputValues() {
-    this._placeName = popupPlaceName.value;
-    this._placeLink = popupPlaceLink.value;
+    this._inputList = this._popupSelector.querySelectorAll('.popup__input');
+    this._formValues = {};
+    this._inputList.forEach(input => {
+      this._formValues[input.name] = input.value;
+    });
+
+    return this._formValues;
   }
 
   close() {
     this._popupSelector.classList.remove('popup_opened');
-    popupPlaceName.value = '';
-    popupPlaceLink.value = '';
+    // popupPlaceName.value = '';
+    // popupPlaceLink.value = '';
+    this._popupSelector.querySelector('.popup__form').reset();
+    // this._submiterForm = null;
+    console.log(this._submiterForm);
+
+    console.log(this._getInputValues());
   }
 
-  renderItem() {
-    this._submiterForm();
-  }
+  // renderItem() {
+  //   this._submiterForm();
+  // }
 }

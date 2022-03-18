@@ -56,9 +56,10 @@ placesSelector
 );
 cardsList.renderItems();
 
-// const cardAfterCreateOfForm = new Section({
-//   items: {},
-//   renderer: () => {
+
+// const cardAfterForm = new Section({
+//   items: initialCards,
+//   renderer: (cardItem) => {
 //     const card = new Card(
 //       cardItem,
 //       '#place-template',
@@ -74,12 +75,32 @@ cardsList.renderItems();
 //       },
 //     );
 //     const cardElement = card.generateCard();
-//     cardAfterCreateOfForm.addItem(cardElement);
+//     cardAfterForm.addItem(cardElement);
 //   }
 // });
+const eee = () => {
+  const test = new PopupWithForm({
+    popupSelector: popupPlace,
+    submiterForm: (formData) => {
+      const card = new Card(
+        formData,
+        '#place-template',
+        () => {
+          const popup = new PopupWithImage(formData, popupShowPlace);
+          popup.open();
+          popup.setEventListeners();
+        },
+      );
+      const cardElement = card.generateCard();
+      cardsList.addItem(cardElement);
+    }
+  })
+  test.open();
+  validateFormAddPlace.enableValidation();
+  test.setEventListeners();
+}
 
-
-// addPlaceBtn.addEventListener('click', cardAfterCreateOfForm);
+addPlaceBtn.addEventListener('click', eee);
 
 
 
