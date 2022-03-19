@@ -4,11 +4,15 @@ export class Popup {
   }
 
   open() {
+    const handleEscClose = (evt) => this._handleEscClose(evt);
     this._popupSelector.classList.add('popup_opened');
+    document.addEventListener('keydown', handleEscClose);
   }
 
   close() {
+    const handleEscClose = (evt) => this._handleEscClose(evt);
     this._popupSelector.classList.remove('popup_opened');
+    document.removeEventListener('keydown', handleEscClose);
   }
 
   _handleEscClose(evt) {
@@ -25,10 +29,6 @@ export class Popup {
       if (evt.target.classList.contains('popup__close-icon')) {
         this.close();
       }
-    });
-
-    document.addEventListener('keydown', (evt) => {
-      this._handleEscClose(evt);
     });
   }
 }
