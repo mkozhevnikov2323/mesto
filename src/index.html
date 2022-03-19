@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
+  <!-- <link rel="stylesheet" href="./pages/index.css"> -->
   <title>Mesto</title>
 </head>
 <body class="root">
   <header class="header">
-    <img src="./images/Logo.svg" alt="Логотип" class="header__logo">
+    <img src="<%=require('./images/Logo.svg')%>" alt="Логотип" class="header__logo">
   </header>
   <main class="content">
     <section class="profile">
-      <img src="./images/Avatar.jpg" alt="Фото профиля" class="profile__avatar">
+      <img src="<%=require('./images/Avatar.jpg')%>" alt="Фото профиля" class="profile__avatar">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <button type="button" class="profile__edit-bth"></button>
@@ -67,7 +67,7 @@
   <template id="place-template">
     <li class="element">
       <div class="element__rectangle">
-        <img src="./images/Trash.svg" alt="Иконка удаления" class="element__trash">
+        <img src="<%=require('./images/Trash.svg')%>" alt="Иконка удаления" class="element__trash">
         <img src="#" alt="#" class="element__photo">
         <p class="element__place"></p>
         <button type="button" class="element__heart"></button>
@@ -75,6 +75,5 @@
     </li>
   </template>
 
-  <script type="module" src="./index.js"></script>
 </body>
 </html>
