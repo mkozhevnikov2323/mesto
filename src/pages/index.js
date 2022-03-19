@@ -22,46 +22,46 @@ import { UserInfo } from "../scripts/components/UserInfo.js";
 const validateFormAddPlace = new FormValidator(settings, formAddPlace);
 const validateFormEditUser = new FormValidator(settings, formEditUser);
 
+const popupWithImage = new PopupWithImage('.popup_action_show-place');
+
+const createCard = (cardItem) => {
+  const card = new Card(
+    cardItem,
+    '#place-template',
+    () => {
+      popupWithImage.open(cardItem);
+      popupWithImage.setEventListeners();
+    },
+  );
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+
 const cardsList = new Section({
   items: initialCards,
   renderer: (cardItem) => {
-    const card = new Card(
-      cardItem,
-      '#place-template',
-      () => {
-        const popup = new PopupWithImage(cardItem, popupShowPlace);
-        popup.open();
-        popup.setEventListeners();
-      },
-    );
-    const cardElement = card.generateCard();
+    const cardElement = createCard(cardItem);
     cardsList.addItem(cardElement);
   }
 },
 placesSelector
 );
 
-const eee = () => {
-  let test = new PopupWithForm({
-    popupSelector: popupPlace,
+const popupWithForm = new PopupWithForm(
+  '.popup_action_add-place',
+    {
     submiterForm: (formData) => {
-      const card = new Card(
-        formData,
-        '#place-template',
-        () => {
-          const popup = new PopupWithImage(formData, popupShowPlace);
-          popup.open();
-          popup.setEventListeners();
-        },
-      );
-      const cardElement = card.generateCard();
+      const cardElement = createCard(formData);
       cardsList.addItem(cardElement);
     }
-  })
-  test.open();
-  validateFormAddPlace.enableValidation();
-  test.setEventListeners();
+  }
+);
+
+const openPopupAddCard = () => {
+  popupWithForm.open();
+  validateFormAddPlace._toggleButtonState();
 }
+
 
 const openPopupEditUser = () => {
   const test = new UserInfo(
@@ -83,8 +83,9 @@ const openPopupEditUser = () => {
 }
 
 editBtn.addEventListener('click', openPopupEditUser);
-addPlaceBtn.addEventListener('click', eee);
+addPlaceBtn.addEventListener('click', openPopupAddCard);
 
+popupWithForm.setEventListeners();
 cardsList.renderItems();
 validateFormAddPlace.enableValidation();
 validateFormEditUser.enableValidation();

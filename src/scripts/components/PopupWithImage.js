@@ -6,11 +6,11 @@ import {
 
 export class PopupWithImage extends Popup {
 
-  open({name, link}) {
+  open(cardItem) {
     super.open();
 
-    imageShowPlace.src = link;
-    imageShowPlace.alt = name;
-    titleShowPlace.textContent = name;
+    imageShowPlace.src = cardItem.link;
+    imageShowPlace.alt = cardItem.name;
+    titleShowPlace.textContent = cardItem.name;
   }
 }
