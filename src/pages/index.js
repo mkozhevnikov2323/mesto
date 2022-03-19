@@ -76,9 +76,7 @@ const openPopupEditUser = () => {
   test.getUserInfo();
   popup.open();
   popup.setEventListeners();
-  popupProfile.querySelector('.popup__form').addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
+  popupProfile.querySelector('.popup__form').addEventListener('submit', () => {
     test.setUserInfo();
     popup.close();
   });
