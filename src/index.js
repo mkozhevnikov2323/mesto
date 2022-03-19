@@ -9,14 +9,14 @@ import {
   settings,
   placesSelector,
   popupShowPlace
-} from "../utils/constants.js"
-import { Card } from "../components/Card.js";
-import { FormValidator } from "../components/FormValidator.js";
-import { Section } from "../components/Section.js";
-import { Popup } from "../components/Popup.js";
-import { PopupWithImage } from "../components/PopupWithImage.js";
-import { PopupWithForm } from "../components/PopupWithForm.js";
-import { UserInfo } from "../components/UserInfo.js";
+} from "./scripts/utils/constants.js"
+import { Card } from "./scripts/components/Card.js";
+import { FormValidator } from "./scripts/components/FormValidator.js";
+import { Section } from "./scripts/components/Section.js";
+import { Popup } from "./scripts/components/Popup.js";
+import { PopupWithImage } from "./scripts/components/PopupWithImage.js";
+import { PopupWithForm } from "./scripts/components/PopupWithForm.js";
+import { UserInfo } from "./scripts/components/UserInfo.js";
 
 const validateFormAddPlace = new FormValidator(settings, formAddPlace);
 const validateFormEditUser = new FormValidator(settings, formEditUser);

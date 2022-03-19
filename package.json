@@ -1,0 +1,23 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "В данном репозитории находится проект о интересных местах. Он представляет собой Web-приложение для добавления фотографий любого уголка планеты. Проект является четвертой, пятой, шестой и седьмой практической работой в моем обучении от *Яндекс.Практикум*.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkozhevnikov2323/mesto.git"
+  },
+  "author": "Maksim Kozhevnikov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mkozhevnikov2323/mesto/issues"
+  },
+  "homepage": "https://github.com/mkozhevnikov2323/mesto#readme",
+  "devDependencies": {
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
+  }
+}
