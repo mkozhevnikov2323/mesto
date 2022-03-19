@@ -6,26 +6,21 @@ import {
 } from "../utils/constants.js";
 
 export class UserInfo {
-  constructor(userData, submitEvent) {
-    this._name = userData.name;
-    this._job = userData.job;
-    this._callBack = submitEvent;
+constructor({ name, job }) {
+    this._name = name;
+    this._job = job;
   }
 
   getUserInfo() {
     const userData = {
-      name: this._name.textContent,
-      job: this._job.textContent
+      name: this._name,
+      job: this._job
     };
     return userData;
   }
 
   setUserInfo() {
-    this._name = popupName.value;
-    this._job = popupProfession.value;
-  }
-
-  changeData() {
-    this._callBack();
+    userName.textContent = popupName.value;
+    userProfession.textContent = popupProfession.value;
   }
 }
