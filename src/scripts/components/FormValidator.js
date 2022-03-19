@@ -8,6 +8,8 @@ export class FormValidator {
     this._inputErrorClass = data.inputErrorClass;
     this._errorClass = data.errorClass;
     this._form = form;
+    this._inputList = Array.from(form.querySelectorAll(this._inputSelector));
+    this._buttonElement = form.querySelector(this._submitButtonSelector);
   }
 
   _showInputError(inputElement, errorMessage) {
@@ -62,8 +64,8 @@ export class FormValidator {
 
   enableValidation() {
     const form = this._form;
-    const inputList = Array.from(form.querySelectorAll(this._inputSelector));
-    const buttonElement = form.querySelector(this._submitButtonSelector);
+    const inputList = this._inputList;
+    const buttonElement = this._buttonElement;
 
     this._toggleButtonState(inputList, buttonElement);
 
