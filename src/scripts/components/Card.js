@@ -32,8 +32,8 @@ export class Card {
       this._openPopupShowPlace();
     });
 
-    this._element.querySelector('.element__trash').addEventListener('click', (evt) => {
-      evt.target.parentElement.parentElement.remove();
+    this._element.querySelector('.element__trash').addEventListener('click', () => {
+      this._element.remove();
     });
 
     this._element.querySelector('.element__heart').addEventListener('click', (evt) => {
