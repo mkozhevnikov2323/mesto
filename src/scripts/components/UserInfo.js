@@ -1,26 +1,20 @@
-import {
-  userName,
-  userProfession,
-  popupName,
-  popupProfession
-} from "../utils/constants.js";
 
 export class UserInfo {
-constructor({ name, job }) {
-    this._name = name;
-    this._job = job;
+constructor(userNameSelector, userDescriptionSelector) {
+  this._userNameElement = document.querySelector(userNameSelector);
+  this._userDescriptionElement = document.querySelector(userDescriptionSelector);
   }
 
   getUserInfo() {
     const userData = {
-      name: this._name,
-      job: this._job
+      name: this._userNameElement.textContent,
+      job: this._userDescriptionElement.textContent
     };
     return userData;
   }
 
   setUserInfo() {
-    userName.textContent = popupName.value;
-    userProfession.textContent = popupProfession.value;
+    this._userNameElement.textContent = name;
+    this._userDescriptionElement.textContent = job;
   }
 }
