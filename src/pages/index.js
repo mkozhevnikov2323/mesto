@@ -1,15 +1,12 @@
 import './index.css';
 import {
   editBtn,
-  popupProfile,
   addPlaceBtn,
-  popupPlace,
   formEditUser,
   formAddPlace,
   initialCards,
   settings,
   placesSelector,
-  popupShowPlace
 } from "../scripts/utils/constants.js"
 import { Card } from "../scripts/components/Card.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
@@ -23,6 +20,7 @@ const validateFormAddPlace = new FormValidator(settings, formAddPlace);
 const validateFormEditUser = new FormValidator(settings, formEditUser);
 
 const popupWithImage = new PopupWithImage('.popup_action_show-place');
+const userInfo = new UserInfo('.profile__name', '.profile__profession');
 
 const createCard = (cardItem) => {
   const card = new Card(
@@ -36,6 +34,13 @@ const createCard = (cardItem) => {
   const cardElement = card.generateCard();
   return cardElement;
 }
+
+const openPopupAddCard = () => {
+  popupWithForm.open();
+  validateFormAddPlace._toggleButtonState();
+}
+
+
 
 const cardsList = new Section({
   items: initialCards,
@@ -57,34 +62,25 @@ const popupWithForm = new PopupWithForm(
   }
 );
 
-const openPopupAddCard = () => {
-  popupWithForm.open();
-  validateFormAddPlace._toggleButtonState();
-}
-
+const popupEditUser = new PopupWithForm(
+  '.popup_action_edit-profile',
+    {
+    submiterForm: () => {
+      userInfo.setUserInfo(popupEditUser._getInputValues());
+    }
+  }
+);
 
 const openPopupEditUser = () => {
-  const test = new UserInfo(
-    {
-      name: "Жак-Ив Кусто",
-      job: "Исследователь океана"
-    }
-  );
-  const popup = new Popup(
-    popupProfile
-  );
-  test.getUserInfo();
-  popup.open();
-  popup.setEventListeners();
-  popupProfile.querySelector('.popup__form').addEventListener('submit', () => {
-    test.setUserInfo();
-    popup.close();
-  });
+  popupEditUser.open();
+  userInfo.getUserInfo();
 }
+
 
 editBtn.addEventListener('click', openPopupEditUser);
 addPlaceBtn.addEventListener('click', openPopupAddCard);
 
+popupEditUser.setEventListeners();
 popupWithForm.setEventListeners();
 cardsList.renderItems();
 validateFormAddPlace.enableValidation();

@@ -13,8 +13,8 @@ constructor(userNameSelector, userDescriptionSelector) {
     return userData;
   }
 
-  setUserInfo() {
-    this._userNameElement.textContent = name;
-    this._userDescriptionElement.textContent = job;
+  setUserInfo(newUserData) {
+    this._userNameElement.textContent = newUserData.name;
+    this._userDescriptionElement.textContent = newUserData.job;
   }
 }
