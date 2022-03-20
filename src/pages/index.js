@@ -7,6 +7,8 @@ import {
   initialCards,
   settings,
   placesSelector,
+  popupName,
+  popupProfession
 } from "../scripts/utils/constants.js"
 import { Card } from "../scripts/components/Card.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
@@ -67,13 +69,17 @@ const popupEditUser = new PopupWithForm(
     {
     submiterForm: () => {
       userInfo.setUserInfo(popupEditUser._getInputValues());
+      console.log(userInfo._userNameElement)
     }
   }
 );
 
 const openPopupEditUser = () => {
   popupEditUser.open();
-  userInfo.getUserInfo();
+  const newUserInfo = userInfo.getUserInfo();
+  popupName.value = newUserInfo.name;
+  popupProfession.value = newUserInfo.job;
+  validateFormEditUser.enableValidation();
 }
 
 
