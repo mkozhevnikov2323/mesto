@@ -13,7 +13,6 @@ import {
 import { Card } from "../scripts/components/Card.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
 import { Section } from "../scripts/components/Section.js";
-import { Popup } from "../scripts/components/Popup.js";
 import { PopupWithImage } from "../scripts/components/PopupWithImage.js";
 import { PopupWithForm } from "../scripts/components/PopupWithForm.js";
 import { UserInfo } from "../scripts/components/UserInfo.js";
@@ -23,26 +22,6 @@ const validateFormEditUser = new FormValidator(settings, formEditUser);
 
 const popupWithImage = new PopupWithImage('.popup_action_show-place');
 const userInfo = new UserInfo('.profile__name', '.profile__profession');
-
-const createCard = (cardItem) => {
-  const card = new Card(
-    cardItem,
-    '#place-template',
-    () => {
-      popupWithImage.open(cardItem);
-      popupWithImage.setEventListeners();
-    },
-  );
-  const cardElement = card.generateCard();
-  return cardElement;
-}
-
-const openPopupAddCard = () => {
-  popupWithForm.open();
-  validateFormAddPlace._toggleButtonState();
-}
-
-
 
 const cardsList = new Section({
   items: initialCards,
@@ -69,19 +48,35 @@ const popupEditUser = new PopupWithForm(
     {
     submiterForm: () => {
       userInfo.setUserInfo(popupEditUser._getInputValues());
-      console.log(userInfo._userNameElement)
     }
   }
 );
+
+const createCard = (cardItem) => {
+  const card = new Card(
+    cardItem,
+    '#place-template',
+    () => {
+      popupWithImage.open(cardItem);
+      popupWithImage.setEventListeners();
+    },
+  );
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+
+const openPopupAddCard = () => {
+  popupWithForm.open();
+  validateFormAddPlace._toggleButtonState();
+}
 
 const openPopupEditUser = () => {
   popupEditUser.open();
   const newUserInfo = userInfo.getUserInfo();
   popupName.value = newUserInfo.name;
   popupProfession.value = newUserInfo.job;
-  validateFormEditUser.enableValidation();
+  validateFormEditUser._toggleButtonState();
 }
-
 
 editBtn.addEventListener('click', openPopupEditUser);
 addPlaceBtn.addEventListener('click', openPopupAddCard);

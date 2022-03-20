@@ -34,45 +34,41 @@ export class FormValidator {
     }
   }
 
-  _setEventListeners(inputList, buttonElement) {
-    this._toggleButtonState(inputList, buttonElement);
+  _setEventListeners() {
+    this._toggleButtonState();
 
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(inputList, buttonElement);
+        this._toggleButtonState();
       });
     });
   }
 
-  _hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => {
+  _hasInvalidInput() {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     })
   }
 
-  _toggleButtonState(inputList, buttonElement) {
-    if (this._hasInvalidInput(inputList))  {
-      buttonElement.classList.add(this._inactiveButtonClass);
-      buttonElement.setAttribute('disabled', '');
+  _toggleButtonState() {
+    if (this._hasInvalidInput(this._inputList))  {
+      this._buttonElement.classList.add(this._inactiveButtonClass);
+      this._buttonElement.setAttribute('disabled', '');
     }
     else {
-      buttonElement.classList.remove(this._inactiveButtonClass);
-      buttonElement.removeAttribute('disabled');
+      this._buttonElement.classList.remove(this._inactiveButtonClass);
+      this._buttonElement.removeAttribute('disabled');
     }
   }
 
   enableValidation() {
-    const form = this._form;
-    const inputList = this._inputList;
-    const buttonElement = this._buttonElement;
+    this._toggleButtonState(this._inputList, this._buttonElement);
 
-    this._toggleButtonState(inputList, buttonElement);
-
-    form.addEventListener('submit', () => {
-      this._toggleButtonState(inputList, buttonElement);
+    this._form.addEventListener('submit', () => {
+      this._toggleButtonState(this._inputList, this._buttonElement);
     });
 
-    this._setEventListeners(inputList, buttonElement);
+    this._setEventListeners(this._inputList, this._buttonElement);
   }
 }
