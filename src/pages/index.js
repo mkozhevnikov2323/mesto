@@ -21,6 +21,8 @@ const validateFormAddPlace = new FormValidator(settings, formAddPlace);
 const validateFormEditUser = new FormValidator(settings, formEditUser);
 
 const popupWithImage = new PopupWithImage('.popup_action_show-place');
+popupWithImage.setEventListeners();
+
 const userInfo = new UserInfo('.profile__name', '.profile__profession');
 
 const cardsList = new Section({
@@ -58,7 +60,6 @@ const createCard = (cardItem) => {
     '#place-template',
     () => {
       popupWithImage.open(cardItem);
-      popupWithImage.setEventListeners();
     },
   );
   const cardElement = card.generateCard();
@@ -67,7 +68,7 @@ const createCard = (cardItem) => {
 
 const openPopupAddCard = () => {
   popupWithForm.open();
-  validateFormAddPlace._toggleButtonState();
+  validateFormAddPlace.toggleButtonState();
 }
 
 const openPopupEditUser = () => {
@@ -75,7 +76,7 @@ const openPopupEditUser = () => {
   const newUserInfo = userInfo.getUserInfo();
   popupName.value = newUserInfo.name;
   popupProfession.value = newUserInfo.job;
-  validateFormEditUser._toggleButtonState();
+  validateFormEditUser.toggleButtonState();
 }
 
 editBtn.addEventListener('click', openPopupEditUser);
