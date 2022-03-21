@@ -48,8 +48,8 @@ const popupWithForm = new PopupWithForm(
 const popupEditUser = new PopupWithForm(
   '.popup_action_edit-profile',
     {
-    submiterForm: () => {
-      userInfo.setUserInfo(popupEditUser._getInputValues());
+    submiterForm: (formData) => {
+      userInfo.setUserInfo(formData);
     }
   }
 );
