@@ -9,7 +9,10 @@ import {
   placesSelector,
   popupName,
   popupProfession
-} from "../scripts/utils/constants.js"
+} from "../scripts/utils/constants.js";
+import {
+  api
+} from "../scripts/components/Api.js";
 import { Card } from "../scripts/components/Card.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
 import { Section } from "../scripts/components/Section.js";
@@ -26,15 +29,30 @@ popupWithImage.setEventListeners();
 
 const userInfo = new UserInfo('.profile__name', '.profile__profession');
 
-const cardsList = new Section({
-  items: initialCards,
-  renderer: (cardItem) => {
-    const cardElement = createCard(cardItem);
-    cardsList.addItem(cardElement);
-  }
-},
-placesSelector
-);
+// const cardsList = new Section({
+//   items: initialCards,
+//   renderer: (cardItem) => {
+//     const cardElement = createCard(cardItem);
+//     cardsList.addItem(cardElement);
+//   }
+// },
+// placesSelector
+// );
+
+
+const createSection = (arrayCards) => {
+  const cardsList = new Section({
+    items: arrayCards,
+    renderer: (cardItem) => {
+      const cardElement = createCard(cardItem);
+      cardsList.addItem(cardElement);
+    }
+  },
+  placesSelector
+  );
+  return cardsList;
+}
+const cardsList = createSection(initialCards);
 
 const popupWithForm = new PopupWithForm(
   '.popup_action_add-place',
@@ -85,6 +103,28 @@ addPlaceBtn.addEventListener('click', openPopupAddCard);
 
 popupEditUser.setEventListeners();
 popupWithForm.setEventListeners();
-cardsList.renderItems();
+// cardsList.renderItems();
 validateFormAddPlace.enableValidation();
 validateFormEditUser.enableValidation();
+
+api.getUserInfo()
+  .then((result) => {
+    // console.log(result);
+  })
+  .catch((err) => {
+    console.log(err);
+  }
+);
+
+api.getInitialCards()
+  .then((result) => {
+    // console.log(result);
+    // cardsList.renderItems();
+    const cardsListFromServer = createSection(result);
+    cardsListFromServer.renderItems();
+  })
+  .catch((err) => {
+    console.log(err);
+  }
+);
+
