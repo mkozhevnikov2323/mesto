@@ -17,9 +17,30 @@ export class Api {
 
         return Promise.reject(`Ошибка: ${res.status}`);
       })
-      // .then((data) => {
-      //   console.log(data.name);
-      // })
+      .catch((err) => {
+        console.log('Ошибка. Запрос не выполнен: ', err);
+    });
+  }
+
+  setNewCard(data) {
+    return fetch(`${this.baseUrl}/cards`, {
+      method: 'POST',
+      headers: {
+        authorization: `${this.token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link
+      })
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
       .catch((err) => {
         console.log('Ошибка. Запрос не выполнен: ', err);
     });

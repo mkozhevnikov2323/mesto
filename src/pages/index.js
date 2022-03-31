@@ -52,17 +52,24 @@ const createSection = (arrayCards) => {
   );
   return cardsList;
 }
-const cardsList = createSection(initialCards);
+const cardsList = createSection({});
 
 const popupWithForm = new PopupWithForm(
   '.popup_action_add-place',
     {
     submiterForm: (formData) => {
-      const cardElement = createCard(formData);
-      cardsList.addItem(cardElement);
+      api.setNewCard(formData)
+        .then((result) => {
+          // console.log(result);
+        })
+        .catch((err) => {
+          console.log(err);
+        }
+      );
     }
   }
 );
+
 
 const popupEditUser = new PopupWithForm(
   '.popup_action_edit-profile',
@@ -118,8 +125,6 @@ api.getUserInfo()
 
 api.getInitialCards()
   .then((result) => {
-    // console.log(result);
-    // cardsList.renderItems();
     const cardsListFromServer = createSection(result);
     cardsListFromServer.renderItems();
   })
@@ -127,4 +132,15 @@ api.getInitialCards()
     console.log(err);
   }
 );
+
+// api.setNewCard({name: '454', link: 'http://test.ru'})
+//   .then((result) => {
+//     // const cardsListFromServer = createSection(result);
+//     // cardsListFromServer.renderItems();
+//     console.log(result);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   }
+// );
 
