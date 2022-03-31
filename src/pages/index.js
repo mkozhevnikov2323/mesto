@@ -21,6 +21,7 @@ import { FormValidator } from "../scripts/components/FormValidator.js";
 import { Section } from "../scripts/components/Section.js";
 import { PopupWithImage } from "../scripts/components/PopupWithImage.js";
 import { PopupWithForm } from "../scripts/components/PopupWithForm.js";
+import { PopupDeleteCard } from '../scripts/components/PopupDeleteCard.js';
 import { UserInfo } from "../scripts/components/UserInfo.js";
 import { Api } from "../scripts/components/Api.js";
 
@@ -29,6 +30,14 @@ const validateFormEditUser = new FormValidator(settings, formEditUser);
 
 const popupWithImage = new PopupWithImage('.popup_action_show-place');
 popupWithImage.setEventListeners();
+
+const popupDeleteCard = new PopupDeleteCard(
+  '.popup_action_delete-place', {
+    handleSubmit: () => {
+
+    }
+  });
+popupDeleteCard.setEventListeners();
 
 const userInfo = new UserInfo('.profile__name', '.profile__profession');
 
@@ -105,9 +114,9 @@ const createCard = (cardItem) => {
     () => {
       popupWithImage.open(cardItem);
     },
-
-    // isOwner()
-
+    () => {
+      popupDeleteCard.open();
+    }
   );
   const cardElement = card.generateCard();
   return cardElement;

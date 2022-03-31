@@ -49,6 +49,10 @@ export class Api {
     });
   }
 
+  deleteCard() {
+    return fetch()
+  }
+
   getUserInfo() {
     return fetch(`${this.baseUrl}/users/me`, {
       headers: {

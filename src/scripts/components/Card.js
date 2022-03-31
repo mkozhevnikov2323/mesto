@@ -1,10 +1,11 @@
 export class Card {
-  constructor(data, cardSelector, handleCardClick) {
+  constructor(data, cardSelector, handleCardClick, handleDeleteCard) {
     this._name = data.name;
     this._link = data.link;
     this._userId = data.owner._id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteCard = handleDeleteCard;
   }
 
   _getTemplate() {
@@ -14,6 +15,10 @@ export class Card {
 
   _openPopupShowPlace() {
     this._handleCardClick();
+  }
+
+  _openPopupDeleteCard() {
+    this._handleDeleteCard();
   }
 
   generateCard() {
@@ -39,7 +44,8 @@ export class Card {
     });
 
     this._element.querySelector('.element__trash').addEventListener('click', () => {
-      this._element.remove();
+      // this._element.remove();
+      this._openPopupDeleteCard();
     });
 
     this._element.querySelector('.element__heart').addEventListener('click', (evt) => {

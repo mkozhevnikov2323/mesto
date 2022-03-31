@@ -58,3 +58,4 @@
 @import url(../blocks/popup/__photo/popup__photo.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/_action/popup_action_show-place.css);
+@import url(../blocks/popup/_action/popup_action_delete-place.css);
