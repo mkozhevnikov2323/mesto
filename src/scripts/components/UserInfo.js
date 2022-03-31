@@ -8,13 +8,13 @@ constructor(userNameSelector, userDescriptionSelector) {
   getUserInfo() {
     const userData = {
       name: this._userNameElement.textContent,
-      job: this._userDescriptionElement.textContent
+      about: this._userDescriptionElement.textContent
     };
     return userData;
   }
 
   setUserInfo(newUserData) {
     this._userNameElement.textContent = newUserData.name;
-    this._userDescriptionElement.textContent = newUserData.job;
+    this._userDescriptionElement.textContent = newUserData.about;
   }
 }

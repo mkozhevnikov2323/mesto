@@ -60,10 +60,34 @@ export class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
       })
       .then((data) => {
-        // console.log(data.name);
+        return data;
       })
       .catch((err) => {
         console.log('Ошибка. Запрос не выполнен: ', err);
+    });
+  }
+
+  setUserInfo(data) {
+    return fetch(`${this.baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        authorization: `${this.token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about
+      })
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Ошибка: ${res.status}`);
+    })
+    .catch((err) => {
+      console.log('Ошибка. Запрос не выполнен: ', err);
     });
   }
 

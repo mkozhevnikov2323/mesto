@@ -75,7 +75,16 @@ const popupEditUser = new PopupWithForm(
   '.popup_action_edit-profile',
     {
     submiterForm: (formData) => {
-      userInfo.setUserInfo(formData);
+      // userInfo.setUserInfo(formData);
+      api.setUserInfo(formData)
+        .then((result) => {
+          // console.log(result);
+          console.log(formData);
+        })
+        .catch((err) => {
+          console.log(err);
+        }
+      );
     }
   }
 );
