@@ -10,7 +10,8 @@ import {
   popupName,
   popupProfession,
   userName,
-  userProfession
+  userProfession,
+  garbage
 } from "../scripts/utils/constants.js";
 import {
   api
@@ -62,7 +63,7 @@ const popupWithForm = new PopupWithForm(
     submiterForm: (formData) => {
       api.setNewCard(formData)
         .then((result) => {
-          // console.log(result);
+          console.log(result);
         })
         .catch((err) => {
           console.log(err);
@@ -77,14 +78,10 @@ const popupEditUser = new PopupWithForm(
   '.popup_action_edit-profile',
     {
     submiterForm: (formData) => {
-      // userInfo.setUserInfo(formData);
       api.setUserInfo(formData)
         .then((result) => {
-          // console.log(result);
-          // console.log(formData);
           api.getUserInfo()
             .then((result) => {
-              // console.log(result);
               userName.textContent = result.name;
               userProfession.textContent = result.about;
             })
@@ -108,6 +105,9 @@ const createCard = (cardItem) => {
     () => {
       popupWithImage.open(cardItem);
     },
+
+    // isOwner()
+
   );
   const cardElement = card.generateCard();
   return cardElement;
@@ -137,7 +137,6 @@ validateFormEditUser.enableValidation();
 
 api.getUserInfo()
   .then((result) => {
-    // console.log(result);
     userName.textContent = result.name;
     userProfession.textContent = result.about;
   })
@@ -156,14 +155,4 @@ api.getInitialCards()
   }
 );
 
-// api.setNewCard({name: '454', link: 'http://test.ru'})
-//   .then((result) => {
-//     // const cardsListFromServer = createSection(result);
-//     // cardsListFromServer.renderItems();
-//     console.log(result);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   }
-// );
 

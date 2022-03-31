@@ -41,6 +41,9 @@ export class Api {
 
         return Promise.reject(`Ошибка: ${res.status}`);
       })
+      .then((data) => {
+        return data;
+      })
       .catch((err) => {
         console.log('Ошибка. Запрос не выполнен: ', err);
     });
