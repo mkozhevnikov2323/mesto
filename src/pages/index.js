@@ -8,7 +8,9 @@ import {
   settings,
   placesSelector,
   popupName,
-  popupProfession
+  popupProfession,
+  userName,
+  userProfession
 } from "../scripts/utils/constants.js";
 import {
   api
@@ -79,7 +81,17 @@ const popupEditUser = new PopupWithForm(
       api.setUserInfo(formData)
         .then((result) => {
           // console.log(result);
-          console.log(formData);
+          // console.log(formData);
+          api.getUserInfo()
+            .then((result) => {
+              // console.log(result);
+              userName.textContent = result.name;
+              userProfession.textContent = result.about;
+            })
+            .catch((err) => {
+              console.log(err);
+            }
+          );
         })
         .catch((err) => {
           console.log(err);
@@ -110,7 +122,7 @@ const openPopupEditUser = () => {
   popupEditUser.open();
   const newUserInfo = userInfo.getUserInfo();
   popupName.value = newUserInfo.name;
-  popupProfession.value = newUserInfo.job;
+  popupProfession.value = newUserInfo.about;
   validateFormEditUser.toggleButtonState();
 }
 
@@ -126,6 +138,8 @@ validateFormEditUser.enableValidation();
 api.getUserInfo()
   .then((result) => {
     // console.log(result);
+    userName.textContent = result.name;
+    userProfession.textContent = result.about;
   })
   .catch((err) => {
     console.log(err);
