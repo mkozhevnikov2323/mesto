@@ -61,3 +61,4 @@
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/_action/popup_action_show-place.css);
 @import url(../blocks/popup/_action/popup_action_delete-place.css);
+@import url(../blocks/popup/_action/popup_action_change-avatar.css);
