@@ -39,6 +39,7 @@ const popupDeleteCard = new PopupDeleteCard(
   });
 popupDeleteCard.setEventListeners();
 
+
 const userInfo = new UserInfo('.profile__name', '.profile__profession');
 
 // const cardsList = new Section({
@@ -72,7 +73,7 @@ const popupWithForm = new PopupWithForm(
     submiterForm: (formData) => {
       api.setNewCard(formData)
         .then((result) => {
-          console.log(result);
+          console.log(result._id);
         })
         .catch((err) => {
           console.log(err);

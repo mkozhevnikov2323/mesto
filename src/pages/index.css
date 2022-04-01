@@ -16,6 +16,7 @@
 
 /* Profile */
 @import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__avatar-container/profile__avatar-container.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__name/profile__name.css);
@@ -31,6 +32,7 @@
 @import url(../blocks/element/__place/element__place.css);
 @import url(../blocks/element/__heart/element__heart.css);
 @import url(../blocks/element/__heart/_active/element__heart_active.css);
+@import url(../blocks/element/__heart-counter/element__heart-counter.css);
 @import url(../blocks/element/__trash/element__trash.css);
 
 /* Footer */

@@ -4,6 +4,10 @@ export class Api {
     this.token = options.headers.authorization
   }
 
+  getCardId() {
+    this.idCard = this.setNewCard(data);
+  }
+
   getInitialCards() {
     return fetch(`${this.baseUrl}/cards`, {
       headers: {
@@ -38,19 +42,32 @@ export class Api {
         if (res.ok) {
           return res.json();
         }
-
         return Promise.reject(`Ошибка: ${res.status}`);
       })
-      .then((data) => {
-        return data;
-      })
+      // .then((data) => {
+      //   return data;
+      // })
       .catch((err) => {
         console.log('Ошибка. Запрос не выполнен: ', err);
     });
   }
 
-  deleteCard() {
-    return fetch()
+  deleteCard(id) {
+    return fetch(`${this.baseUrl}/cards/${id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: `${this.token}`
+      }
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log('Ошибка. Запрос не выполнен: ', err);
+    });
   }
 
   getUserInfo() {

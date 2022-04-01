@@ -12,7 +12,9 @@
   </header>
   <main class="content">
     <section class="profile">
-      <img src="<%=require('./images/Avatar.jpg')%>" alt="Фото профиля" class="profile__avatar">
+      <div class="profile__avatar-container">
+        <img src="<%=require('./images/Avatar.jpg')%>" alt="Фото профиля" class="profile__avatar">
+      </div>
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <button type="button" class="profile__edit-bth"></button>
@@ -77,6 +79,7 @@
         <img src="#" alt="#" class="element__photo">
         <p class="element__place"></p>
         <button type="button" class="element__heart"></button>
+        <div class="element__heart-counter">0</div>
       </div>
     </li>
   </template>
