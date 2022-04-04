@@ -33,21 +33,12 @@ export class Api {
   }
 
   deleteCard(id) {
-    return fetch(`${this._baseUrl}/cards/${id}`, {
+    return this._createFetch(`${this._baseUrl}/${id}`, {
       method: 'DELETE',
       headers: {
         authorization: `${this._token}`
       }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log('Ошибка. Запрос не выполнен: ', err);
-    });
   }
 
   getUserInfo() {

@@ -38,7 +38,9 @@ popupWithImage.setEventListeners();
 const popupDeleteCard = new PopupDeleteCard(
   '.popup_action_delete-place', {
     handleSubmit: () => {
-
+      api.deleteCard()
+        .then((result) => console.log(result))
+        .catch((err) => console.log(err))
     }
   });
 popupDeleteCard.setEventListeners();
@@ -56,13 +58,16 @@ const createSection = (arrayCards) => {
   return cardsList;
 }
 
-const popupWithForm = new PopupWithForm(
+const popupAddPlace = new PopupWithForm(
   '.popup_action_add-place',
     {
     submiterForm: (formData) => {
       api.setNewCard(formData)
-        .then((result) => console.log(result._id))
-        .catch((err) => console.log(err))
+        .then((result) => {
+          const cardFromServer = createSection(result);
+          cardFromServer.renderItems();
+        })
+        .catch((err) => console.log(err));
     }
   }
 );
@@ -113,7 +118,7 @@ const createCard = (cardItem) => {
 }
 
 const openPopupAddCard = () => {
-  popupWithForm.open();
+  popupAddPlace.open();
   validateFormAddPlace.toggleButtonState();
 }
 
@@ -136,7 +141,7 @@ avatar.addEventListener('click', openPopupChangeAvatar);
 
 popupChangeAvatar.setEventListeners();
 popupEditUser.setEventListeners();
-popupWithForm.setEventListeners();
+popupAddPlace.setEventListeners();
 validateFormAddPlace.enableValidation();
 validateFormEditUser.enableValidation();
 validateFormEditAvatar.enableValidation();
@@ -153,6 +158,7 @@ api.getInitialCards()
   .then((result) => {
     const cardsListFromServer = createSection(result);
     cardsListFromServer.renderItems();
+
   })
   .catch((err) => console.log(err));
 
