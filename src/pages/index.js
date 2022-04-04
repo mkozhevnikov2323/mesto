@@ -4,6 +4,7 @@ import {
   addPlaceBtn,
   formEditUser,
   formAddPlace,
+  formEditAvatar,
   initialCards,
   settings,
   placesSelector,
@@ -11,7 +12,8 @@ import {
   popupProfession,
   userName,
   userProfession,
-  garbage
+  garbage,
+  avatar
 } from "../scripts/utils/constants.js";
 import {
   api
@@ -27,6 +29,7 @@ import { Api } from "../scripts/components/Api.js";
 
 const validateFormAddPlace = new FormValidator(settings, formAddPlace);
 const validateFormEditUser = new FormValidator(settings, formEditUser);
+const validateFormEditAvatar = new FormValidator(settings, formEditAvatar);
 const userInfo = new UserInfo('.profile__name', '.profile__profession');
 const popupWithImage = new PopupWithImage('.popup_action_show-place');
 popupWithImage.setEventListeners();
@@ -82,6 +85,15 @@ const popupEditUser = new PopupWithForm(
   }
 );
 
+const popupChangeAvatar = new PopupWithForm(
+  '.popup_action_change-avatar',
+  {
+    submiterForm: (formData) => {
+      console.log(formData);
+    }
+  }
+);
+
 const createCard = (cardItem) => {
   const card = new Card(
     cardItem,
@@ -110,14 +122,21 @@ const openPopupEditUser = () => {
   validateFormEditUser.toggleButtonState();
 }
 
+const openPopupChangeAvatar = () => {
+  popupChangeAvatar.open();
+
+}
+
 editBtn.addEventListener('click', openPopupEditUser);
 addPlaceBtn.addEventListener('click', openPopupAddCard);
+avatar.addEventListener('click', openPopupChangeAvatar);
 
+popupChangeAvatar.setEventListeners();
 popupEditUser.setEventListeners();
 popupWithForm.setEventListeners();
-
 validateFormAddPlace.enableValidation();
 validateFormEditUser.enableValidation();
+validateFormEditAvatar.enableValidation();
 
 api.getUserInfo()
   .then((result) => {

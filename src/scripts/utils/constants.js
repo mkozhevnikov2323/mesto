@@ -1,13 +1,17 @@
 // All popups
 export const popups = document.querySelectorAll('.popup');
+export const popupPlace = document.querySelector('.popup_action_add-place');
+export const popupShowPlace = document.querySelector('.popup_action_show-place');
+export const popupProfile = document.querySelector('.popup_action_edit-profile');
+export const popupAvatar = document.querySelector('.popup_action_change-avatar');
 
 // Open and close pop-up Edit Profile
 export const editBtn = document.querySelector('.profile__edit-bth');
-export const popupProfile = document.querySelector('.popup_action_edit-profile');
+export const avatar = document.querySelector('.profile__avatar-container');
+
 
 // Open and close pop-up Add Place
 export const addPlaceBtn = document.querySelector('.profile__add-btn');
-export const popupPlace = document.querySelector('.popup_action_add-place');
 export const popupPlaceSubmitBtn = popupPlace.querySelector('.popup__save-btn');
 
 // Get info about user
@@ -21,14 +25,13 @@ export const userInfoData = {name: userName.textContent, job: userProfession.tex
 export const popupPlaceName = popupPlace.querySelector('.popup__input_data_place-name');
 export const popupPlaceLink = popupPlace.querySelector('.popup__input_data_place-link');
 
-// Save new user info
+// Forms
 export const formEditUser = popupProfile.querySelector('.popup__form');
-
-// Save new place
 export const formAddPlace = popupPlace.querySelector('.popup__form');
+export const formEditAvatar = popupAvatar.querySelector('.popup__form');
 
 // Popup places
-export const popupShowPlace = document.querySelector('.popup_action_show-place');
+
 export const imageShowPlace = popupShowPlace.querySelector('.popup__photo');
 export const titleShowPlace = popupShowPlace.querySelector('.popup__photo-title');
 
