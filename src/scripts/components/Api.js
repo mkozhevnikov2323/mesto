@@ -1,62 +1,42 @@
 export class Api {
   constructor(options) {
-    this.baseUrl = options.baseUrl,
-    this.token = options.headers.authorization
+    this._baseUrl = options.baseUrl,
+    this._token = options.headers.authorization
   }
 
-  getCardId() {
-    this.idCard = this.setNewCard(data);
+  _createFetch(url, options = {}) {
+    return fetch(url, options)
+      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+      .catch(err => console.log(`Запрос не выполнен: ${err}`))
   }
 
   getInitialCards() {
-    return fetch(`${this.baseUrl}/cards`, {
+    return this._createFetch(`${this._baseUrl}/cards`, {
       headers: {
-        authorization: `${this.token}`
+        authorization: `${this._token}`
       }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        console.log('Ошибка. Запрос не выполнен: ', err);
-    });
   }
 
   setNewCard(data) {
-    return fetch(`${this.baseUrl}/cards`, {
+    return this._createFetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: {
-        authorization: `${this.token}`,
+        authorization: `${this._token}`,
         'Content-Type': 'application/json'
-      },
+    },
       body: JSON.stringify({
         name: data.name,
         link: data.link
       })
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      // .then((data) => {
-      //   return data;
-      // })
-      .catch((err) => {
-        console.log('Ошибка. Запрос не выполнен: ', err);
-    });
   }
 
   deleteCard(id) {
-    return fetch(`${this.baseUrl}/cards/${id}`, {
+    return fetch(`${this._baseUrl}/cards/${id}`, {
       method: 'DELETE',
       headers: {
-        authorization: `${this.token}`
+        authorization: `${this._token}`
       }
     })
       .then(res => {
@@ -71,31 +51,18 @@ export class Api {
   }
 
   getUserInfo() {
-    return fetch(`${this.baseUrl}/users/me`, {
+    return this._createFetch(`${this._baseUrl}/users/me`, {
       headers: {
-        authorization: `${this.token}`
+        authorization: `${this._token}`
       }
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .then((data) => {
-        return data;
-      })
-      .catch((err) => {
-        console.log('Ошибка. Запрос не выполнен: ', err);
-    });
   }
 
   setUserInfo(data) {
-    return fetch(`${this.baseUrl}/users/me`, {
+    return this._createFetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: {
-        authorization: `${this.token}`,
+        authorization: `${this._token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -103,18 +70,7 @@ export class Api {
         about: data.about
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-    .catch((err) => {
-      console.log('Ошибка. Запрос не выполнен: ', err);
-    });
   }
-
 }
 
 

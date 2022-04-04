@@ -27,7 +27,7 @@ import { Api } from "../scripts/components/Api.js";
 
 const validateFormAddPlace = new FormValidator(settings, formAddPlace);
 const validateFormEditUser = new FormValidator(settings, formEditUser);
-
+const userInfo = new UserInfo('.profile__name', '.profile__profession');
 const popupWithImage = new PopupWithImage('.popup_action_show-place');
 popupWithImage.setEventListeners();
 
@@ -38,20 +38,6 @@ const popupDeleteCard = new PopupDeleteCard(
     }
   });
 popupDeleteCard.setEventListeners();
-
-
-const userInfo = new UserInfo('.profile__name', '.profile__profession');
-
-// const cardsList = new Section({
-//   items: initialCards,
-//   renderer: (cardItem) => {
-//     const cardElement = createCard(cardItem);
-//     cardsList.addItem(cardElement);
-//   }
-// },
-// placesSelector
-// );
-
 
 const createSection = (arrayCards) => {
   const cardsList = new Section({
@@ -65,20 +51,14 @@ const createSection = (arrayCards) => {
   );
   return cardsList;
 }
-const cardsList = createSection({});
 
 const popupWithForm = new PopupWithForm(
   '.popup_action_add-place',
     {
     submiterForm: (formData) => {
       api.setNewCard(formData)
-        .then((result) => {
-          console.log(result._id);
-        })
-        .catch((err) => {
-          console.log(err);
-        }
-      );
+        .then((result) => console.log(result._id))
+        .catch((err) => console.log(err))
     }
   }
 );
@@ -95,15 +75,9 @@ const popupEditUser = new PopupWithForm(
               userName.textContent = result.name;
               userProfession.textContent = result.about;
             })
-            .catch((err) => {
-              console.log(err);
-            }
-          );
+            .catch((err) => console.log(err));
         })
-        .catch((err) => {
-          console.log(err);
-        }
-      );
+        .catch((err) => console.log(err));
     }
   }
 );
@@ -141,7 +115,7 @@ addPlaceBtn.addEventListener('click', openPopupAddCard);
 
 popupEditUser.setEventListeners();
 popupWithForm.setEventListeners();
-// cardsList.renderItems();
+
 validateFormAddPlace.enableValidation();
 validateFormEditUser.enableValidation();
 
@@ -150,19 +124,13 @@ api.getUserInfo()
     userName.textContent = result.name;
     userProfession.textContent = result.about;
   })
-  .catch((err) => {
-    console.log(err);
-  }
-);
+  .catch((err) => console.log(err));
 
 api.getInitialCards()
   .then((result) => {
     const cardsListFromServer = createSection(result);
     cardsListFromServer.renderItems();
   })
-  .catch((err) => {
-    console.log(err);
-  }
-);
+  .catch((err) => console.log(err));
 
 
