@@ -90,7 +90,9 @@ const popupChangeAvatar = new PopupWithForm(
   '.popup_action_change-avatar',
   {
     submiterForm: (formData) => {
-      console.log(formData);
+      api.setUserAvatar(formData)
+        .then((result) => userAvatar.src = result.avatar)
+        .catch((err) => console.log(err));
     }
   }
 );

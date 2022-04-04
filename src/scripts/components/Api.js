@@ -71,6 +71,19 @@ export class Api {
       })
     })
   }
+
+  setUserAvatar(data) {
+    return this._createFetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: `${this._token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        avatar: data.avatar
+      })
+    })
+  }
 }
 
 
