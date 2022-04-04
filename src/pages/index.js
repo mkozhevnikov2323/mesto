@@ -12,6 +12,7 @@ import {
   popupProfession,
   userName,
   userProfession,
+  userAvatar,
   garbage,
   avatar
 } from "../scripts/utils/constants.js";
@@ -142,6 +143,7 @@ api.getUserInfo()
   .then((result) => {
     userName.textContent = result.name;
     userProfession.textContent = result.about;
+    userAvatar.src = result.avatar;
   })
   .catch((err) => console.log(err));
 

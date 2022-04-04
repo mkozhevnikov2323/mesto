@@ -17,6 +17,7 @@ export const popupPlaceSubmitBtn = popupPlace.querySelector('.popup__save-btn');
 // Get info about user
 export const userName = document.querySelector('.profile__name');
 export const userProfession = document.querySelector('.profile__profession');
+export const userAvatar = document.querySelector('.profile__avatar');
 export const popupName = popupProfile.querySelector('.popup__input_data_name');
 export const popupProfession = popupProfile.querySelector('.popup__input_data_job');
 export const userInfoData = {name: userName.textContent, job: userProfession.textContent};
