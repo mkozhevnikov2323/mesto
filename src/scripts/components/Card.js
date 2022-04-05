@@ -30,6 +30,14 @@ export class Card {
     return this._idOwnerLike;
   }
 
+  getCountLikes() {
+    return this._quantityLikes;
+  }
+
+  setCounter(num) {
+    this._elementCounterOfLikes.textContent = num;
+  }
+
   _openPopupShowPlace() {
     this._handleCardClick();
   }

@@ -121,29 +121,28 @@ const createCard = (cardItem) => {
       cardElementfromServer = card;
     },
     () => {
-      // console.log(123);
       const cardId = card.getIdCard();
-      api.addLike(cardId)
-        .then(result => {
-          // result.likes.forEach(item => {
-          //   if (item.name === 'Maksim Kozhevnikov') {
-          //     card.deleteLike(); //не сделан метод
-          //     сonsole.log(card.getIdOwnerLike());
-          //   } else {
-          //     card.setLike();
-          //   }
-          // })
-      });
-      const ownerId = card.getIdOwnerLike();
-      ownerId.find(item => {
-        if (item === 'Maksim Kozhevnikov') {
-          console.log(1)
-        } else {
-          console.log(2)
-        }
-      })
+      let counterLikes;
 
+      if (card.isLiked('761edb0fe2f2cbc489706bfd')) {
+        api.deleteLike(cardId)
+          .then(result => {
+            counterLikes = result.likes.length;
+            card.setCounter(counterLikes);
+            card.deleteLike();
+          })
+        // card.deleteLike();
 
+      } else {
+        api.addLike(cardId)
+          .then(result => {
+            counterLikes = result.likes.length;
+            card.setCounter(counterLikes);
+            card.setLike();
+          })
+        // card.setLike();
+
+      }
     }
   );
   const cardElement = card.generateCard();
