@@ -14,6 +14,10 @@ export class Card {
     return cardElement;
   }
 
+  deleteCard() {
+    this._element.remove();
+  }
+
   getIdCard() {
     return this._id;
   }

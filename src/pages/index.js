@@ -92,13 +92,17 @@ const popupChangeAvatar = new PopupWithForm(
 );
 
 let cardIdfromServer;
+let cardElementfromServer;
 
 const popupDeleteCard = new PopupDeleteCard(
   '.popup_action_delete-place', {
     handleSubmit: () => {
-      console.log(cardIdfromServer);
+      // console.log(cardIdfromServer);
       api.deleteCard(cardIdfromServer)
-        .then(res => console.log(`Удалена карточка ${cardIdfromServer}`))
+        .then(result => {
+
+        });
+      cardElementfromServer.deleteCard();
     }
   });
 popupDeleteCard.setEventListeners();
@@ -114,7 +118,9 @@ const createCard = (cardItem) => {
       popupDeleteCard.open();
       const cardId = card.getIdCard();
       cardIdfromServer = cardId;
-      console.log(cardIdfromServer);
+      // console.log(cardIdfromServer);
+      // card.deleteCard();
+      cardElementfromServer = card;
     }
   );
   const cardElement = card.generateCard();
