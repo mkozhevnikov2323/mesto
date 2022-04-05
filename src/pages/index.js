@@ -118,9 +118,32 @@ const createCard = (cardItem) => {
       popupDeleteCard.open();
       const cardId = card.getIdCard();
       cardIdfromServer = cardId;
-      // console.log(cardIdfromServer);
-      // card.deleteCard();
       cardElementfromServer = card;
+    },
+    () => {
+      // console.log(123);
+      const cardId = card.getIdCard();
+      api.addLike(cardId)
+        .then(result => {
+          // result.likes.forEach(item => {
+          //   if (item.name === 'Maksim Kozhevnikov') {
+          //     card.deleteLike(); //не сделан метод
+          //     сonsole.log(card.getIdOwnerLike());
+          //   } else {
+          //     card.setLike();
+          //   }
+          // })
+      });
+      const ownerId = card.getIdOwnerLike();
+      ownerId.find(item => {
+        if (item === 'Maksim Kozhevnikov') {
+          console.log(1)
+        } else {
+          console.log(2)
+        }
+      })
+
+
     }
   );
   const cardElement = card.generateCard();

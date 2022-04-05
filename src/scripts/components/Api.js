@@ -41,6 +41,15 @@ export class Api {
     })
   }
 
+  addLike(id) {
+    return this._createFetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: 'PUT',
+      headers: {
+        authorization: `${this._token}`
+      }
+    })
+  }
+
   getUserInfo() {
     return this._createFetch(`${this._baseUrl}/users/me`, {
       headers: {
