@@ -5,7 +5,6 @@ import {
   formEditUser,
   formAddPlace,
   formEditAvatar,
-  initialCards,
   settings,
   placesSelector,
   popupName,
@@ -13,12 +12,9 @@ import {
   userName,
   userProfession,
   userAvatar,
-  garbage,
   avatar
 } from "../scripts/utils/constants.js";
-import {
-  api
-} from "../scripts/components/Api.js";
+import { api } from "../scripts/components/Api.js";
 import { Card } from "../scripts/components/Card.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
 import { Section } from "../scripts/components/Section.js";
@@ -26,14 +22,12 @@ import { PopupWithImage } from "../scripts/components/PopupWithImage.js";
 import { PopupWithForm } from "../scripts/components/PopupWithForm.js";
 import { PopupDeleteCard } from '../scripts/components/PopupDeleteCard.js';
 import { UserInfo } from "../scripts/components/UserInfo.js";
-import { Api } from "../scripts/components/Api.js";
 
 const validateFormAddPlace = new FormValidator(settings, formAddPlace);
 const validateFormEditUser = new FormValidator(settings, formEditUser);
 const validateFormEditAvatar = new FormValidator(settings, formEditAvatar);
 const userInfo = new UserInfo('.profile__name', '.profile__profession');
 const popupWithImage = new PopupWithImage('.popup_action_show-place');
-popupWithImage.setEventListeners();
 
 const createSection = (arrayCards) => {
   const cardsList = new Section({
@@ -52,12 +46,14 @@ const popupAddPlace = new PopupWithForm(
   '.popup_action_add-place',
     {
     submiterForm: (formData) => {
+      popupAddPlace.renderLoading('Отправка...');
       api.setNewCard(formData)
         .then((result) => {
           const cardFromServer = createSection(result);
           cardFromServer.renderItems();
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => popupAddPlace.renderLoading('Создать'));
     }
   }
 );
@@ -66,6 +62,7 @@ const popupEditUser = new PopupWithForm(
   '.popup_action_edit-profile',
     {
     submiterForm: (formData) => {
+      popupEditUser.renderLoading('Сохранение...');
       api.setUserInfo(formData)
         .then((result) => {
           api.getUserInfo()
@@ -75,7 +72,8 @@ const popupEditUser = new PopupWithForm(
             })
             .catch((err) => console.log(err));
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => popupEditUser.renderLoading('Сохранить'));
     }
   }
 );
@@ -84,9 +82,11 @@ const popupChangeAvatar = new PopupWithForm(
   '.popup_action_change-avatar',
   {
     submiterForm: (formData) => {
+      popupChangeAvatar.renderLoading('Сохранение...');
       api.setUserAvatar(formData)
         .then((result) => userAvatar.src = result.avatar)
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => popupChangeAvatar.renderLoading('Сохранить'));
     }
   }
 );
@@ -97,15 +97,15 @@ let cardElementfromServer;
 const popupDeleteCard = new PopupDeleteCard(
   '.popup_action_delete-place', {
     handleSubmit: () => {
-      // console.log(cardIdfromServer);
+      popupDeleteCard.renderLoading('Удаление...');
       api.deleteCard(cardIdfromServer)
-        .then(result => {
-
+        .then(result => {})
+        .finally(() => {
+          popupDeleteCard.renderLoading('Да');
         });
       cardElementfromServer.deleteCard();
     }
   });
-popupDeleteCard.setEventListeners();
 
 const createCard = (cardItem) => {
   const card = new Card(
@@ -131,7 +131,7 @@ const createCard = (cardItem) => {
             card.setCounter(counterLikes);
             card.deleteLike();
           })
-        // card.deleteLike();
+          .catch((err) => console.log(err));
 
       } else {
         api.addLike(cardId)
@@ -140,8 +140,7 @@ const createCard = (cardItem) => {
             card.setCounter(counterLikes);
             card.setLike();
           })
-        // card.setLike();
-
+          .catch((err) => console.log(err));
       }
     }
   );
@@ -164,7 +163,6 @@ const openPopupEditUser = () => {
 
 const openPopupChangeAvatar = () => {
   popupChangeAvatar.open();
-
 }
 
 editBtn.addEventListener('click', openPopupEditUser);
@@ -174,6 +172,8 @@ avatar.addEventListener('click', openPopupChangeAvatar);
 popupChangeAvatar.setEventListeners();
 popupEditUser.setEventListeners();
 popupAddPlace.setEventListeners();
+popupDeleteCard.setEventListeners();
+popupWithImage.setEventListeners();
 validateFormAddPlace.enableValidation();
 validateFormEditUser.enableValidation();
 validateFormEditAvatar.enableValidation();

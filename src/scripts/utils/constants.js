@@ -9,7 +9,6 @@ export const popupAvatar = document.querySelector('.popup_action_change-avatar')
 export const editBtn = document.querySelector('.profile__edit-bth');
 export const avatar = document.querySelector('.profile__avatar-container');
 
-
 // Open and close pop-up Add Place
 export const addPlaceBtn = document.querySelector('.profile__add-btn');
 export const popupPlaceSubmitBtn = popupPlace.querySelector('.popup__save-btn');
@@ -32,7 +31,6 @@ export const formAddPlace = popupPlace.querySelector('.popup__form');
 export const formEditAvatar = popupAvatar.querySelector('.popup__form');
 
 // Popup places
-
 export const imageShowPlace = popupShowPlace.querySelector('.popup__photo');
 export const titleShowPlace = popupShowPlace.querySelector('.popup__photo-title');
 

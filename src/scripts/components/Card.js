@@ -5,7 +5,7 @@ export class Card {
     this._id = data._id;
     this._userId = data.owner._id;
     this._quantityLikes = data.likes.length;
-    this._OwnerLike = data.likes;
+    this._ownerLike = data.likes;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteCard = handleDeleteCard;
@@ -26,7 +26,7 @@ export class Card {
   }
 
   getIdOwnerLike() {
-    this._idOwnerLike = this._OwnerLike.map(item => item._id);
+    this._idOwnerLike = this._ownerLike.map(item => item._id);
     return this._idOwnerLike;
   }
 
@@ -91,9 +91,7 @@ export class Card {
       this._openPopupDeleteCard();
     });
 
-    this._element.querySelector('.element__heart').addEventListener('click', (evt) => {
-      // evt.target.classList.toggle('element__heart_active');
-      // console.log(this._quantityLikes);
+    this._element.querySelector('.element__heart').addEventListener('click', () => {
       this._handleLikeClick();
     });
   }
