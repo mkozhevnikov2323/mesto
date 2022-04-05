@@ -4,9 +4,9 @@
   height: 19px;
   border: 0;
   background-color: transparent;
-  position: relative;
-  bottom: 7px;
-  left: 18px;
+  position: absolute;
+  right: 21px;
+  bottom: 38px;
   cursor: pointer;
   transition: .5s;
   background-image: url(../../../images/Heart.svg);
@@ -21,10 +21,9 @@
 @media screen and (max-width: 1024px) {
   .element__heart {
     bottom: 25px;
-    left: 65px;
   }
 }
-
+/*
 @media screen and (max-width: 890px) {
   .element__heart {
     left: 10%;
@@ -35,4 +34,4 @@
   .element__heart {
     left: 5%;
   }
-}
+} */

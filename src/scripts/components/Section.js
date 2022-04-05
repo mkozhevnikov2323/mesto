@@ -11,7 +11,7 @@ export class Section {
   }
 
   renderItems() {
-    this._initialArray.forEach((item) => {
+    [].concat(this._initialArray).forEach((item) => {
       this._renderer(item);
     });
   }

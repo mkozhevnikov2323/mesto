@@ -1,0 +1,13 @@
+.element__heart-counter {
+  position: absolute;
+  right: 11px;
+  bottom: 18px;
+  color: #000;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  width: 40px;
+}

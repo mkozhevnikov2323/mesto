@@ -15,6 +15,10 @@ export class Popup {
     document.removeEventListener('keydown', handleEscClose);
   }
 
+  renderLoading(loadingPhrase) {
+    this._button.textContent = loadingPhrase;
+  }
+
   _handleEscClose(evt) {
     if (evt.key === 'Escape') {
       this.close();
