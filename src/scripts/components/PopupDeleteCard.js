@@ -7,16 +7,16 @@ export class PopupDeleteCard extends Popup {
     this._button = this._popupSelector.querySelector('.popup__save-btn');
   }
 
-  deleleCard() {
-    this._handleSubmit();
-  }
+  // deleleCard(id) {
+  //   this._handleSubmit(id);
+  // }
 
   setEventListeners() {
     super.setEventListeners();
 
     this._button.addEventListener('click', (evt) => {
-      this.deleleCard();
-      // console.log(12);
+      this._handleSubmit();
+
       this.close();
     });
   }

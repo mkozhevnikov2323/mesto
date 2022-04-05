@@ -35,16 +35,6 @@ const userInfo = new UserInfo('.profile__name', '.profile__profession');
 const popupWithImage = new PopupWithImage('.popup_action_show-place');
 popupWithImage.setEventListeners();
 
-const popupDeleteCard = new PopupDeleteCard(
-  '.popup_action_delete-place', {
-    handleSubmit: () => {
-      api.deleteCard()
-        .then((result) => console.log(result))
-        .catch((err) => console.log(err))
-    }
-  });
-popupDeleteCard.setEventListeners();
-
 const createSection = (arrayCards) => {
   const cardsList = new Section({
     items: arrayCards,
@@ -71,7 +61,6 @@ const popupAddPlace = new PopupWithForm(
     }
   }
 );
-
 
 const popupEditUser = new PopupWithForm(
   '.popup_action_edit-profile',
@@ -102,6 +91,18 @@ const popupChangeAvatar = new PopupWithForm(
   }
 );
 
+let cardIdfromServer;
+
+const popupDeleteCard = new PopupDeleteCard(
+  '.popup_action_delete-place', {
+    handleSubmit: () => {
+      console.log(cardIdfromServer);
+      api.deleteCard(cardIdfromServer)
+        .then(res => console.log(`Удалена карточка ${cardIdfromServer}`))
+    }
+  });
+popupDeleteCard.setEventListeners();
+
 const createCard = (cardItem) => {
   const card = new Card(
     cardItem,
@@ -111,6 +112,9 @@ const createCard = (cardItem) => {
     },
     () => {
       popupDeleteCard.open();
+      const cardId = card.getIdCard();
+      cardIdfromServer = cardId;
+      console.log(cardIdfromServer);
     }
   );
   const cardElement = card.generateCard();

@@ -33,7 +33,7 @@ export class Api {
   }
 
   deleteCard(id) {
-    return this._createFetch(`${this._baseUrl}/${id}`, {
+    return this._createFetch(`${this._baseUrl}/cards/${id}`, {
       method: 'DELETE',
       headers: {
         authorization: `${this._token}`

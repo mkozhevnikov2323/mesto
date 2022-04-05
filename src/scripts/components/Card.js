@@ -2,6 +2,7 @@ export class Card {
   constructor(data, cardSelector, handleCardClick, handleDeleteCard) {
     this._name = data.name;
     this._link = data.link;
+    this._id = data._id;
     this._userId = data.owner._id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
@@ -13,12 +14,17 @@ export class Card {
     return cardElement;
   }
 
+  getIdCard() {
+    return this._id;
+  }
+
   _openPopupShowPlace() {
     this._handleCardClick();
   }
 
   _openPopupDeleteCard() {
-    this._handleDeleteCard();
+    this._handleDeleteCard(this._id);
+    // console.log(this._id)
   }
 
   generateCard() {
