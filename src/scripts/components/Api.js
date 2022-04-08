@@ -7,7 +7,6 @@ export class Api {
   _createFetch(url, options = {}) {
     return fetch(url, options)
       .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`))
-      .catch(err => console.log(`Запрос не выполнен: ${err}`))
   }
 
   getInitialCards() {

@@ -12,7 +12,7 @@ export class PopupDeleteCard extends Popup {
 
     this._button.addEventListener('click', () => {
       this._handleSubmit();
-      this.close();
+      // this.close();
     });
   }
 }

@@ -51,6 +51,7 @@ const popupAddPlace = new PopupWithForm(
         .then((result) => {
           const cardFromServer = createSection(result);
           cardFromServer.renderItems();
+          popupAddPlace.close();
         })
         .catch((err) => console.log(err))
         .finally(() => popupAddPlace.renderLoading('Создать'));
@@ -69,6 +70,7 @@ const popupEditUser = new PopupWithForm(
             .then((result) => {
               userName.textContent = result.name;
               userProfession.textContent = result.about;
+              popupEditUser.close();
             })
             .catch((err) => console.log(err));
         })
@@ -84,7 +86,10 @@ const popupChangeAvatar = new PopupWithForm(
     submiterForm: (formData) => {
       popupChangeAvatar.renderLoading('Сохранение...');
       api.setUserAvatar(formData)
-        .then((result) => userAvatar.src = result.avatar)
+        .then((result) => {
+          userAvatar.src = result.avatar;
+          popupChangeAvatar.close();
+        })
         .catch((err) => console.log(err))
         .finally(() => popupChangeAvatar.renderLoading('Сохранить'));
     }
@@ -99,11 +104,13 @@ const popupDeleteCard = new PopupDeleteCard(
     handleSubmit: () => {
       popupDeleteCard.renderLoading('Удаление...');
       api.deleteCard(cardIdfromServer)
-        .then(result => {})
+        .then(result => {
+          cardElementfromServer.deleteCard();
+          popupDeleteCard.close();
+        })
         .finally(() => {
           popupDeleteCard.renderLoading('Да');
         });
-      cardElementfromServer.deleteCard();
     }
   });
 
