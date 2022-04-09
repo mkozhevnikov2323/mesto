@@ -9,9 +9,6 @@ import {
   placesSelector,
   popupName,
   popupProfession,
-  userName,
-  userProfession,
-  userAvatar,
   avatar
 } from "../scripts/utils/constants.js";
 import { api } from "../scripts/components/Api.js";
@@ -26,11 +23,11 @@ import { UserInfo } from "../scripts/components/UserInfo.js";
 const validateFormAddPlace = new FormValidator(settings, formAddPlace);
 const validateFormEditUser = new FormValidator(settings, formEditUser);
 const validateFormEditAvatar = new FormValidator(settings, formEditAvatar);
+
 let userId;
-let profileName;
-let profileAbout;
-let profileAvatar;
 let userInfoFromServer;
+let cardIdfromServer;
+let cardElementfromServer;
 
 const userInfo = new UserInfo(
   '.profile__name',
@@ -38,20 +35,15 @@ const userInfo = new UserInfo(
   '.profile__avatar'
 );
 const popupWithImage = new PopupWithImage('.popup_action_show-place');
-// let userId;
 
-const createSection = (arrayCards) => {
-  const cardsList = new Section({
-    items: arrayCards,
-    renderer: (cardItem) => {
-      const cardElement = createCard(cardItem);
-      cardsList.addItem(cardElement);
-    }
-  },
-  placesSelector
-  );
-  return cardsList;
-}
+const cardsList = new Section({
+  renderer: (cardItem) => {
+    const cardElement = createCard(cardItem);
+    cardsList.addItem(cardElement);
+  }
+},
+placesSelector
+);
 
 const popupAddPlace = new PopupWithForm(
   '.popup_action_add-place',
@@ -60,8 +52,7 @@ const popupAddPlace = new PopupWithForm(
       popupAddPlace.renderLoading('Отправка...');
       api.setNewCard(formData)
         .then((result) => {
-          const cardFromServer = createSection(result);
-          cardFromServer.renderItems();
+          cardsList.renderItems(result);
           popupAddPlace.close();
         })
         .catch((err) => console.log(err))
@@ -82,7 +73,6 @@ const popupEditUser = new PopupWithForm(
               userInfo.setUserInfo(result);
               userInfoFromServer = userInfo.getUserInfo(result);
               popupEditUser.close();
-              console.log(userInfoFromServer)
             })
             .catch((err) => console.log(err));
         })
@@ -103,13 +93,9 @@ const popupChangeAvatar = new PopupWithForm(
             .then((result) => {
               userInfo.setUserInfo(result);
               userInfoFromServer = userInfo.getUserInfo(result);
-              popupChangeAvatar.close()
-              console.log(userInfoFromServer)
+              popupChangeAvatar.close();
             })
             .catch((err) => console.log(err));
-
-
-          // popupChangeAvatar.close();
         })
         .catch((err) => console.log(err))
         .finally(() => popupChangeAvatar.renderLoading('Сохранить'));
@@ -117,8 +103,6 @@ const popupChangeAvatar = new PopupWithForm(
   }
 );
 
-let cardIdfromServer;
-let cardElementfromServer;
 
 const popupDeleteCard = new PopupDeleteCard(
   '.popup_action_delete-place', {
@@ -213,8 +197,6 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     userInfoFromServer = userInfo.getUserInfo(userData);
     userInfo.setUserInfo(userData);
     userId = userData._id;
-
-    const cardsListFromServer = createSection(cards);
-    cardsListFromServer.renderItems();
+    cardsList.renderItems(cards);
   })
   .catch((err) => console.log(err));
