@@ -1,9 +1,10 @@
 export class Card {
-  constructor(data, cardSelector, handleCardClick, handleDeleteCard, handleLikeClick) {
+  constructor(data,userIdfromRendering, cardSelector, handleCardClick, handleDeleteCard, handleLikeClick) {
     this._name = data.name;
     this._link = data.link;
     this._id = data._id;
-    this._userId = data.owner._id;
+    this._userId = userIdfromRendering;
+    this._userIdfromServer = data.owner._id;
     this._quantityLikes = data.likes.length;
     this._ownerLike = data.likes;
     this._cardSelector = cardSelector;
@@ -58,7 +59,7 @@ export class Card {
     this._element.querySelector('.element__place').textContent = this._name;
     this._elementCounterOfLikes.textContent = this._quantityLikes;
 
-    if (this._userId !== '761edb0fe2f2cbc489706bfd') {
+    if (this._userIdfromServer !== this._userId) {
       this._elementGarbage.remove();
     };
 
@@ -69,9 +70,9 @@ export class Card {
     return this._element;
   }
 
-  isLiked(userId) {
+  isLiked() {
     this._arrayOfLikedUsers = this.getIdOwnerLike();
-    return this._arrayOfLikedUsers.includes(userId);
+    return this._arrayOfLikedUsers.includes(this._userId);
   }
 
   setLike() {

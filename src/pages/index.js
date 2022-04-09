@@ -26,8 +26,19 @@ import { UserInfo } from "../scripts/components/UserInfo.js";
 const validateFormAddPlace = new FormValidator(settings, formAddPlace);
 const validateFormEditUser = new FormValidator(settings, formEditUser);
 const validateFormEditAvatar = new FormValidator(settings, formEditAvatar);
-const userInfo = new UserInfo('.profile__name', '.profile__profession');
+let userId;
+let profileName;
+let profileAbout;
+let profileAvatar;
+let userInfoFromServer;
+
+const userInfo = new UserInfo(
+  '.profile__name',
+  '.profile__profession',
+  '.profile__avatar'
+);
 const popupWithImage = new PopupWithImage('.popup_action_show-place');
+// let userId;
 
 const createSection = (arrayCards) => {
   const cardsList = new Section({
@@ -68,9 +79,10 @@ const popupEditUser = new PopupWithForm(
         .then((result) => {
           api.getUserInfo()
             .then((result) => {
-              userName.textContent = result.name;
-              userProfession.textContent = result.about;
+              userInfo.setUserInfo(result);
+              userInfoFromServer = userInfo.getUserInfo(result);
               popupEditUser.close();
+              console.log(userInfoFromServer)
             })
             .catch((err) => console.log(err));
         })
@@ -87,8 +99,17 @@ const popupChangeAvatar = new PopupWithForm(
       popupChangeAvatar.renderLoading('Сохранение...');
       api.setUserAvatar(formData)
         .then((result) => {
-          userAvatar.src = result.avatar;
-          popupChangeAvatar.close();
+          api.getUserInfo()
+            .then((result) => {
+              userInfo.setUserInfo(result);
+              userInfoFromServer = userInfo.getUserInfo(result);
+              popupChangeAvatar.close()
+              console.log(userInfoFromServer)
+            })
+            .catch((err) => console.log(err));
+
+
+          // popupChangeAvatar.close();
         })
         .catch((err) => console.log(err))
         .finally(() => popupChangeAvatar.renderLoading('Сохранить'));
@@ -117,6 +138,7 @@ const popupDeleteCard = new PopupDeleteCard(
 const createCard = (cardItem) => {
   const card = new Card(
     cardItem,
+    userId,
     '#place-template',
     () => {
       popupWithImage.open(cardItem);
@@ -131,7 +153,7 @@ const createCard = (cardItem) => {
       const cardId = card.getIdCard();
       let counterLikes;
 
-      if (card.isLiked('761edb0fe2f2cbc489706bfd')) {
+      if (card.isLiked()) {
         api.deleteLike(cardId)
           .then(result => {
             counterLikes = result.likes.length;
@@ -162,7 +184,7 @@ const openPopupAddCard = () => {
 
 const openPopupEditUser = () => {
   popupEditUser.open();
-  const newUserInfo = userInfo.getUserInfo();
+  const newUserInfo = userInfo.getUserInfo(userInfoFromServer);
   popupName.value = newUserInfo.name;
   popupProfession.value = newUserInfo.about;
   validateFormEditUser.toggleButtonState();
@@ -185,20 +207,14 @@ validateFormAddPlace.enableValidation();
 validateFormEditUser.enableValidation();
 validateFormEditAvatar.enableValidation();
 
-api.getUserInfo()
-  .then((result) => {
-    userName.textContent = result.name;
-    userProfession.textContent = result.about;
-    userAvatar.src = result.avatar;
-  })
-  .catch((err) => console.log(err));
 
-api.getInitialCards()
-  .then((result) => {
-    const cardsListFromServer = createSection(result);
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userInfoFromServer = userInfo.getUserInfo(userData);
+    userInfo.setUserInfo(userData);
+    userId = userData._id;
+
+    const cardsListFromServer = createSection(cards);
     cardsListFromServer.renderItems();
-
   })
   .catch((err) => console.log(err));
-
-
